@@ -40,7 +40,7 @@ jobs:
           n=0
           until [ $n -ge 5 ]
           do
-          mysql -u root -h 127.0.0.1 -p "${{ secrets.DB_CONFIG.password }}" -e "SELECT 1" && break
+          mysql -u root -h 127.0.0.1 -p"${{ secrets.DB_CONFIG.password }}" -e "SELECT 1" && break
           n=$((n+1))
             sleep 5
           done
