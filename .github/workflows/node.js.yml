@@ -14,15 +14,10 @@ on:
 jobs:
   build-node:
     runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:latest
-        env:
-          MYSQL_ROOT_PASSWORD: root,
-          MYSQL_DATABASE: testdb
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    env:
+      DB_USER: root
+      DB_PASSWORD: root
+      MYSQL_DATABASE: testdb
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -35,15 +30,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Wait for database
+      - name: Set up MySQL
         run: |
-          n=0
-          until [ $n -ge 5 ]
-          do
-          mysql -u root -h 127.0.0.1 -p"${{ env.MYSQL_DATABASE }}" -e "SELECT 1" && break
-          n=$((n+1))
-            sleep 5
-          done
+          sudo /etc/init.d/mysql start
+          mysql -e 'CREATE DATABASE ${{ env.MYSQL_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
 
       - name: Run scss
         run: npm run scss
