@@ -14,18 +14,18 @@ on:
 jobs:
   build-node:
     runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:latest
-        env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_CONFIG.password }},
-          MYSQL_DATABASE: ${{ secrets.DB_CONFIG.database }}
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
+      - name: Shutdown Ubuntu MySQL (SUDO)
+        run: sudo service mysql stop
+
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Set up MySQL
+        uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql database: "testdb"
+          mysql root password: ${{ secrets.DB_CONFIG.password  }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
