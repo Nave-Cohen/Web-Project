@@ -1,23 +1,7 @@
 const mysql = require("mysql2");
-const fs = require("fs");
 const db_config = require("../configs/db.config");
 
 const pool = mysql.createPool(db_config.options).promise();
-/* create database */
-
-function createDataBase() {
-  const sqlDump = fs.readFileSync(
-    __dirname + "/../configs/Todo_nodeJs_data.sql",
-    "utf-8"
-  );
-  const sqlStatement = sqlDump.split(";\n");
-  sqlStatement.forEach((statement) => {
-    statement = statement.trim();
-    if (statement !== 0 && !statement.match(/\/\*/)) {
-      pool.query(statement);
-    }
-  });
-}
 
 /* register users */
 async function register(username, email, password) {
@@ -49,15 +33,5 @@ async function login(usernameOrEmail, password) {
       return error;
     });
 }
-
-async function initializeDatabase() {
-  try {
-    createDataBase();
-  } catch (error) {
-    console.error("Error initializing database:", error);
-  }
-}
-
-initializeDatabase();
 
 module.exports = { register, login, pool };
