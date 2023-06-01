@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_DB_HOST: ${{ secrets.DB_HOST }}
-      GITHUB_DB_PASS: ${{ secrets.DB_PASSWORD }}
+      GITHUB_DB_PASS: ${{ secrets.DB_PASS }}
       GITHUB_DB_USER: ${{ secrets.DB_USER }}
       GITHUB_DB_DATABASE: ${{ secrets.DB_DATABASE }}
 
@@ -35,7 +35,7 @@ jobs:
       - name: Set up MySQL
         run: |
           sudo /etc/init.d/mysql start
-          mysql -e 'CREATE DATABASE ${{ env.GITHUB_DB_DATABASE }};' -u${{ env.GITHUB_DB_USER }} -p${{ env.GITHUB_DB_PASS }}
+          mysql -e "CREATE DATABASE ${{ env.GITHUB_DB_DATABASE }};" -u${{ env.GITHUB_DB_USER }} -p${{ env.GITHUB_DB_PASS }}
 
       - name: Run scss
         run: npm run scss
