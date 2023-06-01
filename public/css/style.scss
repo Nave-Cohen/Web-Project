@@ -1,16 +1,20 @@
 $primary: rgb(88,53,154) !default;
-
-
 // scss-docs-start nav-variables
-$nav-link-color:                    $primary !default;
 
 $nav-tabs-border-width:             0 !default;
+$nav-link-color:                    $primary !default;
 $nav-tabs-link-active-color:        white !default;
 $nav-tabs-link-active-bg:           $primary !default;
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
-/* @import "../../node_modules/@fortawesome/fontawesome-free/scss/regular.scss";
-@import "../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss"; */
-@import "https://fonts.googleapis.com/css?family=Raleway:100,300,400|Roboto+Condensed:300,700&display=swap";
 @import "./sign-tab.scss";
+
+
+
+
+/*
+@import "https://fonts.googleapis.com/css?family=Raleway:100,300,400|Roboto+Condensed:300,700&display=swap";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/regular.scss";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+ */

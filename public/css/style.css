@@ -4,7 +4,6 @@
    * Copyright 2011-2022 Twitter, Inc.
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    */
-@import "https://fonts.googleapis.com/css?family=Raleway:100,300,400|Roboto+Condensed:300,700&display=swap";
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -14588,10 +14587,8 @@ readers do not read off random characters that represent icons */
   white-space: nowrap;
   border-width: 0; }
 
-/* @import "../../node_modules/@fortawesome/fontawesome-free/scss/regular.scss";
-@import "../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss"; */
 body {
-  background-color: #fff4fd; }
+  background-color: #ddd3dc; }
 
 #main-container {
   display: flex;
@@ -14614,7 +14611,7 @@ body {
   height: 100%;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
-  background-image: url("../../public/images/signin.png");
+  background-image: url("../../public/images/sign-tab-img.png");
   background-size: cover; }
 
 .child.img h1, .child.img .h1 {
@@ -14626,6 +14623,7 @@ body {
   transform: translate(-50%, -50%); }
 
 .child.img.right {
+  background-image: url("../../public/images/sign-tab-img-reverse.png");
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-top-right-radius: 15px;
@@ -14634,3 +14632,12 @@ body {
 .form-control {
   width: 65%;
   margin: 0 auto 0 auto; }
+
+.nav-item {
+  width: 90px; }
+
+/*
+@import "https://fonts.googleapis.com/css?family=Raleway:100,300,400|Roboto+Condensed:300,700&display=swap";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/regular.scss";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+ */

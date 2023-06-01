@@ -5,19 +5,45 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build-node:
     runs-on: ubuntu-latest
-    container:
-        image: alpine:latest
-        options: --user root
-    steps: 
-    - run: apk add --update nodejs npm
-    - uses: actions/checkout@v3
-    - run: npm install
-    - run: npm run scss
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: testdb
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Wait for database
+        run: |
+          n=0
+          until [ $n -ge 5 ]
+          do
+            mysql -uroot -proot -h 127.0.0.1 -e "SELECT 1" && break
+            n=$((n+1))
+            sleep 5
+          done
+
+      - name: Run scss
+        run: npm run scss
+      - name: Run tests
+        run: npm run jest

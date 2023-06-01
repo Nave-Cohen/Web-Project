@@ -9,7 +9,8 @@
   "scripts": {
     "start": "npm run scss & node app.js",
     "scss": "node-sass --include-path scss public/css/style.scss public/css/style.css",
-    "dev": "npm run scss & nodemon app.js"
+    "dev": "npm run scss & nodemon app.js",
+    "test":"jest --detectOpenHandles"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.0",
@@ -29,5 +30,8 @@
     "events": {
       "restart": "npm run scss && echo 'Server restarted due to changes'"
     }
+  },
+  "devDependencies": {
+    "jest": "^29.5.0"
   }
 }
