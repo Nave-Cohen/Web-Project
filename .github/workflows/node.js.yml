@@ -15,10 +15,11 @@ jobs:
   build-node:
     runs-on: ubuntu-latest
     env:
-      GITHUB_DB_HOST: ${{ secrets.DB_CONFIG.host }}
-      GITHUB_DB_PASS: ${{ secrets.DB_CONFIG.password }}
-      GITHUB_DB_USER: ${{ secrets.DB_CONFIG.user }}
-      GITHUB_DB_DATABASE: ${{ secrets.DB_CONFIG.database }}
+      GITHUB_DB_HOST: ${{ secrets.DB_HOST }}
+      GITHUB_DB_PASS: ${{ secrets.DB_PASSWORD }}
+      GITHUB_DB_USER: ${{ secrets.DB_USER }}
+      GITHUB_DB_DATABASE: ${{ secrets.DB_DATABASE }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
