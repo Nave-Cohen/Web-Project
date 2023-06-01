@@ -2,7 +2,6 @@ const mysql = require("mysql2");
 const fs = require("fs");
 require("dotenv").config();
 
-buildDB();
 function buildDB() {
   const options = {
     host: process.env.DB_HOST || process.env.GITHUB_DB_HOST,
@@ -27,6 +26,7 @@ function buildDB() {
     }
   });
   connection.end();
+  console.log("*** database build successfully. ***");
 }
 
 buildDB();
