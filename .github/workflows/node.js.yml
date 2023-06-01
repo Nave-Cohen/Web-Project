@@ -15,9 +15,10 @@ jobs:
   build-node:
     runs-on: ubuntu-latest
     env:
-      DB_USER: root
-      DB_PASSWORD: root
-      MYSQL_DATABASE: testdb
+      GITHUB_DB_HOST: 127.0.0.1
+      GITHUB_DB_PASS: root
+      GITHUB_DB_USER: root
+      GITHUB_DB_DATABASE: testdb
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -33,7 +34,7 @@ jobs:
       - name: Set up MySQL
         run: |
           sudo /etc/init.d/mysql start
-          mysql -e 'CREATE DATABASE ${{ env.MYSQL_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+          mysql -e 'CREATE DATABASE ${{ env.GITHUB_DB_DATABASE }};' -u${{ env.GITHUB_DB_USER }} -p${{ env.GITHUB_DB_PASS }}
 
       - name: Run scss
         run: npm run scss
