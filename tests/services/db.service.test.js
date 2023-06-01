@@ -35,11 +35,7 @@ it("test_register_successfully_registers_new_user", async () => {
 it("test_register_fails_with_existing_username", async () => {
   // Create a separate connection object
   pool.query = jest.fn().mockRejectedValue({ code: "ER_DUP_ENTRY" });
-  const result = await register(
-    "existuser",
-    "newemail@test.com",
-    "newpassword"
-  );
+  const result = await register("testuser", "newemail@test.com", "newpassword");
   expect(result).toBe(false);
 });
 
