@@ -7,7 +7,7 @@ const pool = mysql.createPool(db_config.options).promise();
 
 function createDataBase() {
   const sqlDump = fs.readFileSync(
-    __dirname + "/../tests/db/Todo_nodeJs_data.sql",
+    __dirname + "/../configs/Todo_nodeJs_data.sql",
     "utf-8"
   );
   const sqlStatement = sqlDump.split(";\n");
