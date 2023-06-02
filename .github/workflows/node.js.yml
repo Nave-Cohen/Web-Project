@@ -35,7 +35,6 @@ jobs:
       - name: Set up MySQL
         run: |
           sudo /etc/init.d/mysql start
-          mysql -e "CREATE DATABASE ${{ env.GITHUB_DB_DATABASE }};" -u${{ env.GITHUB_DB_USER }} -p${{ env.GITHUB_DB_PASS }}
 
       - name: Run scss
         run: npm run scss
