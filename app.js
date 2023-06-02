@@ -23,4 +23,10 @@ app.use("/users", users);
 app.use((req, res, next) => {
   res.sendStatus(404);
 });
+
+if (process.env.npm_lifecycle_event != "test") {
+  app.listen(8080, () => {
+    console.log("listening");
+  });
+}
 module.exports.app = app;
