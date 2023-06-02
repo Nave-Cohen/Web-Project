@@ -23,4 +23,4 @@ app.use("/users", users);
 app.use((req, res, next) => {
   res.sendStatus(404);
 });
-app.listen(3000, () => console.log("server started"));
+module.exports.app = app;

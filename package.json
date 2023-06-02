@@ -7,10 +7,10 @@
   "author": "Nave-Cohen <nave.cohen@e.braude.ac.il>",
   "license": "MIT",
   "scripts": {
-    "start": "npm run build & npm run scss & node app.js",
+    "start": "npm run build & npm run scss & node server.js",
     "scss": "node-sass --include-path scss public/css/style.scss public/css/style.css",
-    "dev": "npm run build & npm run scss & nodemon app.js",
-    "tests": "jest --detectOpenHandles",
+    "dev": "npm run build & npm run scss & nodemon server.js",
+    "tests": "mocha \"./test/**/*.*.test.js\" --reporter spec --exit",
     "build": "dotenv -- run-script-os",
     "build:win32": "mysql -h %DB_HOST% -u %DB_USER% -p%DB_PASS% < %INIT_CWD%/configs/Todo_nodeJs_data.sql",
     "build:linux": "export MYSQL_PWD=$DB_PASS && mysql -h $DB_HOST -u $DB_USER < $INIT_CWD/configs/Todo_nodeJs_data.sql"
@@ -34,8 +34,10 @@
     }
   },
   "devDependencies": {
-    "jest": "^29.5.0",
+    "chai": "^4.3.7",
+    "dotenv-cli": "^7.2.1",
+    "mocha": "^10.2.0",
     "run-script-os": "^1.1.6",
-    "dotenv-cli": "^7.2.1"
+    "supertest": "^6.3.3"
   }
 }
