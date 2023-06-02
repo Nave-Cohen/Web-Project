@@ -10,7 +10,7 @@
     "start": "npm run build & npm run scss & node app.js",
     "scss": "node-sass --include-path scss public/css/style.scss public/css/style.css",
     "dev": "npm run build & npm run scss & nodemon app.js",
-    "test": "jest --detectOpenHandles",
+    "tests": "jest --detectOpenHandles",
     "build": "dotenv -- run-script-os",
     "build:win32": "mysql -h %DB_HOST% -u %DB_USER% -p%DB_PASS% < %INIT_CWD%/configs/Todo_nodeJs_data.sql",
     "build:linux": "export MYSQL_PWD=$DB_PASS && mysql -h $DB_HOST -u $DB_USER < $INIT_CWD/configs/Todo_nodeJs_data.sql"
