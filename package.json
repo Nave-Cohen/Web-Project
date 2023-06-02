@@ -13,7 +13,7 @@
     "test": "jest --detectOpenHandles",
     "build": "dotenv -- run-script-os",
     "build:win32": "mysql -h %DB_HOST% -u %DB_USER% -p%DB_PASS% < \"%cd%/configs/Todo_nodeJs_data.sql\"",
-    "build:linux": "mysql -h $DB_HOST -u $DB_USER$ -p$DB_PASS < $INIT_CWD/configs/Todo_nodeJs_data.sql"
+    "build:linux": "mysql -h $GITHUB_DB_HOST -u $GITHUB_DB_USER$ -p$GITHUB_DB_PASS < $INIT_CWD/configs/Todo_nodeJs_data.sql"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.0",
