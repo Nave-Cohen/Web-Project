@@ -26,6 +26,7 @@ router.get("/signup", function (req, res) {
 
 function renderSignTabs(res, activeTab, inactiveTab) {
   res.render(`ejs/sign-tabs.ejs`, {
+    title: "Sign-" + activeTab.slice(4),
     active: activeTab,
     notactive: inactiveTab,
   });

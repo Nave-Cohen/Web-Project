@@ -1,7 +1,18 @@
 const mysql = require("mysql2");
 const db_config = require("../configs/db.config");
 
-const pool = mysql.createPool(db_config.options).promise();
+class PoolSingleton {
+  constructor() {
+    this.pool = mysql.createPool(db_config.options).promise();
+  }
+
+  static getInstance() {
+    if (!PoolSingleton.instance) PoolSingleton.instance = new PoolSingleton();
+    return PoolSingleton.instance.pool;
+  }
+}
+
+const pool = PoolSingleton.getInstance();
 
 /* register users */
 async function register(username, email, password) {
@@ -33,5 +44,6 @@ async function login(usernameOrEmail, password) {
       return error;
     });
 }
-
+//TODO: get all tasks orderd by date [not done], get all task order by date [done]
+//TODO: add task, remove task
 module.exports = { register, login, pool };

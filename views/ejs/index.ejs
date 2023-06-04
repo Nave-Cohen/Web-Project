@@ -1,14 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <%- include('../partials/head.ejs',{"title":"To-Do App"}) %>
-</head>
+    <link rel="stylesheet" href="../../public/css/index.css" />
+  </head>
 
-<body>
+  <body>
     <main>
-        <button type="button" class="btn btn-primary">click</button>
+      <div class="container-fluid">
+        <div class="sidebar">
+          <ul class="list-group">
+            <li id="menu-item" class="list-group-item">
+              <h2>Menu</h2>
+              <i id="menu-icon" class="fa-solid fa-xmark"></i>
+            </li>
+            <li id="user-name" class="search-item list-group-item">
+              <input
+                type="text"
+                class="form-control"
+                id="search-input"
+                placeholder="Seach task"
+              />
+            </li>
+            <li class="list-item list-group-item">
+              <i class="icons fa-regular fa-calendar"></i>
+              Upcoming
+              <span class="badge bg-secondary">4</span>
+            </li>
+            <li class="list-item list-group-item">
+              <i class="icons fa-regular fa-calendar-check"></i>
+              Today
+              <span class="badge bg-secondary">4</span>
+            </li>
+            <li class="list-item list-group-item">
+              <i class="icons fa-solid fa-list-check"></i>
+              Done
+            </li>
+          </ul>
+        </div>
+        <div class="middle">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button
+                  class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                >
+                  Accordion Item #1
+                </button>
+              </h2>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse show"
+                aria-labelledby="headingOne"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="card">
+                  <div class="card-body">
+                    <div class="header mb-2 d-flex just-content-between">
+                      <h5 class="card-title">Card title</h5>
+                      <div class="dropdown dropdown-menu-start ms-auto">
+                        <button
+                          class="btn"
+                          role="button"
+                          id="dropdownMenuLink"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                          <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
+                        <ul
+                          class="dropdown-menu"
+                          aria-labelledby="dropdownMenuLink"
+                        >
+                          <li>
+                            <button
+                              class="dropdown-item"
+                              onclick="doneClicked(this)"
+                            >
+                              <i class="fa-solid fa-check"></i>&nbsp;&nbsp; Done
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              class="dropdown-item"
+                              onclick="deleteClicked(this)"
+                            >
+                              <i class="fa-sharp fa-solid fa-trash"></i
+                              >&nbsp;&nbsp; Delete
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <p class="card-text overflow-auto">
+                      Some quick example text to build on the card title and
+                      make up the bulk of the card's content.
+                    </p>
+                    <div class="footer d-flex justify-content-between">
+                      <small class="text-meuted">start - 05-02-2023</small>
+                      <small class="text-meuted">created - 1 days ago</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="right-side">
+          <ul class="list-group">
+            <li class="list-group-item">An item</li>
+            <li class="list-group-item">A second item</li>
+            <li class="list-group-item">A third item</li>
+            <li class="list-group-item">A fourth item</li>
+            <li class="list-group-item">And a fifth one</li>
+          </ul>
+        </div>
+      </div>
     </main>
-</body>
-
+  </body>
 </html>
+<script>
+  function doneClicked(id) {}
+  function deleteClicked(id) {
+    $(id).remove();
+  }
+</script>
