@@ -13,20 +13,19 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/public", express.static(`${__dirname}/public`));
 app.use(sessions);
-app.use(jwt);
 
-app.get("/", async (req, res) => {
+app.get("/", jwt, async (req, res) => {
   res.render("ejs/index.ejs");
 });
 app.use("/users", users);
 
 app.use((req, res, next) => {
-  res.sendStatus(404);
+  res.render("ejs/404.ejs");
 });
 
 if (process.env.npm_lifecycle_event != "test") {
   app.listen(8080, () => {
-    console.log("listening");
+    console.log("listening on port 8080");
   });
 }
 module.exports.app = app;

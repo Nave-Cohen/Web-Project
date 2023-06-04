@@ -1,8 +1,8 @@
-const express = require("express"),
+const { Router } = require("express"),
   dbService = require("../services/db.service"),
   User = require("../entities/user");
 
-const router = express.Router();
+const router = Router();
 
 //render login
 router.get("/signin", function (req, res) {

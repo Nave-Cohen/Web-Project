@@ -7,9 +7,9 @@
   "author": "Nave-Cohen <nave.cohen@e.braude.ac.il>",
   "license": "MIT",
   "scripts": {
-    "start": "npm run build & npm run scss & node server.js",
+    "start": "npm run build & npm run scss & node app.js",
     "scss": "node-sass --include-path scss public/css/style.scss public/css/style.css",
-    "dev": "npm run build & npm run scss & nodemon server.js",
+    "dev": "npm run build & npm run scss & nodemon app.js",
     "tests": "mocha --recursive --reporter spec --exit",
     "build": "dotenv -- run-script-os",
     "build:win32": "mysql -h %DB_HOST% -u %DB_USER% -p%DB_PASS% < %INIT_CWD%/configs/init.sql",
