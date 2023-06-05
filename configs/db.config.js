@@ -8,4 +8,4 @@ const options = {
 };
 
 module.exports.options = options;
-module.exports.jwtToken = process.env.jwtSecret;
+module.exports.JWTTOKEN = process.env.JWTTOKEN;

@@ -5,7 +5,7 @@ const db_config = require("../configs/db.config");
 
 const day = 1000 * (60 ^ 3) * 24;
 module.exports = sessions({
-  secret: db_config.jwtToken,
+  secret: db_config.JWTTOKEN,
   resave: false,
   saveUninitialized: false,
   cookie: {
