@@ -11,6 +11,7 @@ module.exports = sessions({
   cookie: {
     maxAge: day,
     secure: false,
+    expires: day,
   },
   store: new mysqlStore(db_config.options, pool),
 });
