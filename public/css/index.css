@@ -1,0 +1,121 @@
+:root{
+    --sidebar-color:#C4DFDF;
+    --sidebar-item-color:#d5ecec;
+    --sidebar-item-hover-color:#c8e4e4;
+    --sidebar-menu-color:#91bdbd;
+
+
+}
+body,main{
+    height:100vh
+}
+.container-fluid{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display:flex;
+    justify-content: stretch;
+    height:95%;
+}
+
+.sidebar {
+    order:1;
+    width: 12%;
+    background-color: var(--sidebar-color);
+    border-radius: 10px;
+    transition: all 0.5s ease;
+}
+.sidebar.close{
+    width:5%;
+}
+.sidebar.close .badge,.sidebar.close #menu-text,.sidebar.close #search-item,.sidebar.close medium{
+    display:none;
+}
+.sidebar.close #menu-item{
+    padding:0;
+    text-align: center;
+}
+.sidebar.close #menu-icon{
+    margin: 0 auto;
+}
+.sidebar.close .icons{
+    margin: 0 auto;
+    font-size: 20px;
+}
+.sidebar.on-search{
+    width:30%;
+}
+
+.sidebar #menu-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--sidebar-menu-color);
+    height:80px;
+}
+.sidebar .badge{
+    display: flex;
+    margin-left: auto;
+    margin-right:3px;
+}
+.sidebar #menu-icon{
+    font-size: x-large;
+}
+.sidebar #menu-icon:hover{
+    cursor: pointer;
+}
+.sidebar .icons{
+    margin-left:15px;
+    margin-right: 30px;
+}
+.sidebar .list-item{
+    display:flex;
+    align-items: center;
+    padding: 15px 0;
+    margin: 2px 0;
+    background-color:var(--sidebar-item-color);
+}
+.sidebar .list-item:hover{
+    cursor: pointer;
+    background-color: var(--sidebar-item-hover-color);
+}
+.sidebar .search-item{
+    background-color: var(--sidebar-item-hover-color);
+}
+.middle{
+    margin: 0 10px;
+    order:2;
+    width:50%;
+}
+.right-side{
+    order:3;
+    width: 35%;
+    border: 1px solid blue;
+}
+@media only screen and (max-width: 600px) {
+    .sidebar.close{
+        width:10%;
+    }
+    .sidebar{
+        width:50%;
+    }
+    .sidebar .badge{
+        margin-left:auto;
+    }
+    .sidebar .icons{
+        margin:0 5px;
+    }
+    .middle{
+        width: 100%;
+    }
+    .sidebar #menu-text{
+        display:none;
+    }
+    .sidebar.close .badge,.sidebar.close #search-item,.sidebar.close medium{
+        display:none;
+    }
+    .right-side{
+        display:none;
+    }
+}
