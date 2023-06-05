@@ -1,19 +1,27 @@
+const ejs = require("ejs");
+const path = require("path");
+const ejsPath = path.join(__dirname, "..", "views/partials/task.ejs");
+
 class Task {
   constructor(task) {
     this.id = task.id;
     this.title = task.title;
     this.content = task.content;
-    this.created = task.created;
+    this.createdDate = task.created;
     //TODO: add task start time
   }
 
   get created() {
-    return this.created_;
+    return this.getCreated();
   }
 
   set created(dateStr) {
+    this.createdDate = dateStr;
+  }
+
+  getCreated() {
     const today = new Date();
-    const date = new Date(dateStr);
+    const date = new Date(this.createdDate);
     const timeDiff = Math.floor((today - date) / 1000);
 
     const units = ["year", "month", "week", "day", "hour", "minute", "second"];
@@ -31,26 +39,20 @@ class Task {
       const value = Math.floor(timeDiff / durations[i]);
 
       if (value > 0) {
-        this.created_ =
-          value === 1 ? `1 ${units[i]} ago` : `${value} ${units[i]}s ago`;
-        return;
+        return value === 1 ? `1 ${units[i]} ago` : `${value} ${units[i]}s ago`;
       }
     }
-    this.created_ = "Just now";
+    return "Just now";
   }
 
-  toHtml() {
-    return `<div class="accordion-item">
-     <h2 class="accordion-header" id="task-${this.id}">
-       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${this.id}" aria-expanded="true" aria-controls="collapse-${this.id}">
-         ${this.title}
-       </button>
-     </h2>
-     <div id="collapse-${this.id}" class="accordion-collapse collapse show" aria-labelledby="task-${this.id}" data-bs-parent="#accordion-${this.id}">
-       <div class="accordion-body">
-        TODO: add card body
-       </div>
-     </div>`;
+  async toHtml() {
+    try {
+      const html = await ejs.renderFile(ejsPath, { task: this });
+      return html;
+    } catch (err) {
+      console.error(err);
+      return "";
+    }
   }
 }
 
@@ -69,13 +71,19 @@ class Tasks {
 }
 
 const dateStr = "2023-06-03 00:16:32";
-const result = new Tasks([
-  {
-    id: 1,
-    uid: 1,
-    title: "asdf",
-    content: "asdf",
-    created: dateStr,
-  },
-]);
-console.log(result.toHtml());
+const result = new Task({
+  id: 1,
+  uid: 1,
+  title: "asdf",
+  content: "asdf",
+  created: dateStr,
+});
+
+result
+  .toHtml()
+  .then((html) => {
+    console.log(html);
+  })
+  .catch((err) => {
+    console.error(err);
+  });

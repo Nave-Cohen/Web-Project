@@ -8,13 +8,13 @@
   <body>
     <main>
       <div class="container-fluid">
-        <div class="sidebar">
+        <div class="sidebar close">
           <ul class="list-group">
             <li id="menu-item" class="list-group-item">
-              <h2>Menu</h2>
-              <i id="menu-icon" class="fa-solid fa-xmark"></i>
+              <h2 id="menu-text">Menu</h2>
+              <i id="menu-icon" class="fa-solid fa-bars"></i>
             </li>
-            <li id="user-name" class="search-item list-group-item">
+            <li id="search-item" class="search-item list-group-item">
               <input
                 type="text"
                 class="form-control"
@@ -24,17 +24,17 @@
             </li>
             <li class="list-item list-group-item">
               <i class="icons fa-regular fa-calendar"></i>
-              Upcoming
+              <medium>Upcoming</medium>
               <span class="badge bg-secondary">4</span>
             </li>
             <li class="list-item list-group-item">
               <i class="icons fa-regular fa-calendar-check"></i>
-              Today
+              <medium>Today</medium>
               <span class="badge bg-secondary">4</span>
             </li>
             <li class="list-item list-group-item">
               <i class="icons fa-solid fa-list-check"></i>
-              Done
+              <medium>Done</medium>
             </li>
           </ul>
         </div>
@@ -102,8 +102,8 @@
                       make up the bulk of the card's content.
                     </p>
                     <div class="footer d-flex justify-content-between">
-                      <small class="text-meuted">start - 05-02-2023</small>
-                      <small class="text-meuted">created - 1 days ago</small>
+                      <small class="text-muted">start - 05-02-2023</small>
+                      <small class="text-muted">created - 1 days ago</small>
                     </div>
                   </div>
                 </div>
@@ -129,4 +129,19 @@
   function deleteClicked(id) {
     $(id).remove();
   }
+
+  $("#search-input").focus(() => {
+    $(".sidebar").addClass("on-search");
+  });
+  $("#search-input").focusout(() => {
+    $(".sidebar").removeClass("on-search");
+  });
+  $("#menu-icon").click(function () {
+    if ($(this).hasClass("fa-solid fa-xmark")) {
+      $(this).attr("class", "fa-solid fa-bars");
+    } else {
+      $(this).attr("class", "fa-solid fa-xmark");
+    }
+    $(".sidebar").toggleClass("close");
+  });
 </script>

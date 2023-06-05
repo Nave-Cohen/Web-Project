@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 const express = require("express");
-
 const app = express();
 const users = require("./routes/users");
 const sessions = require("./services/sessions.service");
