@@ -2,6 +2,7 @@
 const express = require("express");
 const app = express();
 const users = require("./routes/users");
+const tasks = require("./routes/tasks");
 const sessions = require("./services/sessions.service");
 const jwt = require("./middlewares/login.middleware");
 
@@ -14,9 +15,11 @@ app.use("/public", express.static(`${__dirname}/public`));
 app.use(sessions);
 
 app.get("/", jwt, async (req, res) => {
-  res.render("ejs/index.ejs");
+  res.redirect("tasks/upcoming");
 });
 app.use("/users", users);
+
+app.use("/tasks", jwt, tasks);
 
 app.use((req, res, next) => {
   res.render("ejs/404.ejs");

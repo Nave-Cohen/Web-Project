@@ -60,30 +60,23 @@ class Tasks {
   constructor(tasks) {
     this.tasks = tasks.map((task) => new Task(task));
   }
-  toHtml() {
-    var html = `<div class="accordion" id="accordion">`;
-    this.tasks.forEach((task) => {
-      html += task.toHtml();
-    });
-    return html + "</div>";
-    //TODO: create acordeon
+  async toHtml() {
+    const htmlArray = await Promise.all(
+      this.tasks.map(async (task) => {
+        return await task.toHtml();
+      })
+    );
+
+    const accordionHtml = htmlArray.join("");
+
+    const wrappedHtml = `
+      <div class="accordion" id="accordion">
+        ${accordionHtml}
+      </div>
+    `;
+
+    return wrappedHtml;
   }
 }
 
-const dateStr = "2023-06-03 00:16:32";
-const result = new Task({
-  id: 1,
-  uid: 1,
-  title: "asdf",
-  content: "asdf",
-  created: dateStr,
-});
-
-result
-  .toHtml()
-  .then((html) => {
-    console.log(html);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+module.exports.Tasks = Tasks;

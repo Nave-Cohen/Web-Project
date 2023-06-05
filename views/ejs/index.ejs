@@ -38,79 +38,7 @@
             </li>
           </ul>
         </div>
-        <div class="middle">
-          <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
-                <button
-                  class="accordion-button"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseOne"
-                  aria-expanded="true"
-                  aria-controls="collapseOne"
-                >
-                  Accordion Item #1
-                </button>
-              </h2>
-              <div
-                id="collapseOne"
-                class="accordion-collapse collapse show"
-                aria-labelledby="headingOne"
-                data-bs-parent="#accordionExample"
-              >
-                <div class="card">
-                  <div class="card-body">
-                    <div class="header mb-2 d-flex just-content-between">
-                      <h5 class="card-title">Card title</h5>
-                      <div class="dropdown dropdown-menu-start ms-auto">
-                        <button
-                          class="btn"
-                          role="button"
-                          id="dropdownMenuLink"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </button>
-                        <ul
-                          class="dropdown-menu"
-                          aria-labelledby="dropdownMenuLink"
-                        >
-                          <li>
-                            <button
-                              class="dropdown-item"
-                              onclick="doneClicked(this)"
-                            >
-                              <i class="fa-solid fa-check"></i>&nbsp;&nbsp; Done
-                            </button>
-                          </li>
-                          <li>
-                            <button
-                              class="dropdown-item"
-                              onclick="deleteClicked(this)"
-                            >
-                              <i class="fa-sharp fa-solid fa-trash"></i
-                              >&nbsp;&nbsp; Delete
-                            </button>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    <p class="card-text overflow-auto">
-                      Some quick example text to build on the card title and
-                      make up the bulk of the card's content.
-                    </p>
-                    <div class="footer d-flex justify-content-between">
-                      <small class="text-muted">start - 05-02-2023</small>
-                      <small class="text-muted">created - 1 days ago</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="middle"><%- tasks %></div>
         <div class="right-side">
           <ul class="list-group">
             <li class="list-group-item">An item</li>
@@ -123,25 +51,5 @@
       </div>
     </main>
   </body>
+  <script src="../../public/js/index.js"></script>
 </html>
-<script>
-  function doneClicked(id) {}
-  function deleteClicked(id) {
-    $(id).remove();
-  }
-
-  $("#search-input").focus(() => {
-    $(".sidebar").addClass("on-search");
-  });
-  $("#search-input").focusout(() => {
-    $(".sidebar").removeClass("on-search");
-  });
-  $("#menu-icon").click(function () {
-    if ($(this).hasClass("fa-solid fa-xmark")) {
-      $(this).attr("class", "fa-solid fa-bars");
-    } else {
-      $(this).attr("class", "fa-solid fa-xmark");
-    }
-    $(".sidebar").toggleClass("close");
-  });
-</script>

@@ -44,6 +44,29 @@ async function login(usernameOrEmail, password) {
       return error;
     });
 }
+
+async function getAllTasks(userid) {
+  return await pool
+    .query("SELECT * FROM tasks WHERE uid = ? ORDER BY created DESC", [userid])
+    .then(([rows]) => {
+      return rows.length > 0 ? rows : null;
+    })
+    .catch((error) => {
+      return error;
+    });
+}
+
+async function deleteTask(taskid) {
+  return await pool
+    .query("DELETE FROM tasks WHERE id = ?", [taskid])
+    .then(([rows]) => {
+      return rows.affectedRows > 0;
+    })
+    .catch((error) => {
+      return error;
+    });
+}
+
 //TODO: get all tasks orderd by date [not done], get all task order by date [done]
 //TODO: add task, remove task
-module.exports = { register, login, pool };
+module.exports = { register, login, pool, getAllTasks, deleteTask };
