@@ -45,9 +45,27 @@ async function login(usernameOrEmail, password) {
     });
 }
 
+// async function getTodayTasks(userid) {
+//   const date = new Date();
+//   return await pool
+//     .query(
+//       "SELECT * FROM tasks WHERE uid = ? AND done = 0 AND created = ? ORDER BY created DESC",
+//       [userid, date]
+//     )
+//     .then(([rows]) => {
+//       return rows.length > 0 ? rows : null;
+//     })
+//     .catch((error) => {
+//       return error;
+//     });
+// }
+
 async function getAllTasks(userid) {
   return await pool
-    .query("SELECT * FROM tasks WHERE uid = ? ORDER BY created DESC", [userid])
+    .query(
+      "SELECT * FROM tasks WHERE uid = ? AND done = 0 ORDER BY created DESC",
+      [userid]
+    )
     .then(([rows]) => {
       return rows.length > 0 ? rows : null;
     })
@@ -67,6 +85,24 @@ async function deleteTask(taskid) {
     });
 }
 
+async function finishTask(taskid) {
+  return await pool
+    .query("UPDATE `tasks` SET `done` = 1 WHERE `id` = ?", [taskid])
+    .then(([rows]) => {
+      return rows.affectedRows > 0;
+    })
+    .catch((error) => {
+      return error;
+    });
+}
+
 //TODO: get all tasks orderd by date [not done], get all task order by date [done]
 //TODO: add task, remove task
-module.exports = { register, login, pool, getAllTasks, deleteTask };
+module.exports = {
+  register,
+  login,
+  pool,
+  getAllTasks,
+  deleteTask,
+  finishTask,
+};

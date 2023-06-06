@@ -1,5 +1,5 @@
 const { Router } = require("express"),
-  { getAllTasks, deleteTask } = require("../services/db.service"),
+  { getAllTasks, deleteTask, finishTask } = require("../services/db.service"),
   { Tasks } = require("../entities/task");
 
 const router = Router();
@@ -20,4 +20,12 @@ router.delete("/", async function (req, res) {
   }
 });
 
+router.post("/", async function (req, res) {
+  try {
+    var result = await finishTask(req.body.id);
+    res.sendStatus(204);
+  } catch {
+    res.sendStatus(500);
+  }
+});
 module.exports = router;
