@@ -45,20 +45,20 @@ async function login(usernameOrEmail, password) {
     });
 }
 
-// async function getTodayTasks(userid) {
-//   const date = new Date();
-//   return await pool
-//     .query(
-//       "SELECT * FROM tasks WHERE uid = ? AND done = 0 AND created = ? ORDER BY created DESC",
-//       [userid, date]
-//     )
-//     .then(([rows]) => {
-//       return rows.length > 0 ? rows : null;
-//     })
-//     .catch((error) => {
-//       return error;
-//     });
-// }
+async function getTodayTasks(userid) {
+  const date = new Date().toISOString().split("T")[0];
+  return await pool
+    .query(
+      "SELECT * FROM tasks WHERE uid = ? AND done = 0 AND created = ? ORDER BY created DESC",
+      [userid, date]
+    )
+    .then(([rows]) => {
+      return rows.length > 0 ? rows : [];
+    })
+    .catch((error) => {
+      return error;
+    });
+}
 
 async function getAllTasks(userid) {
   return await pool
@@ -105,4 +105,5 @@ module.exports = {
   getAllTasks,
   deleteTask,
   finishTask,
+  getTodayTasks,
 };
