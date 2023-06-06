@@ -88,6 +88,29 @@ body,main{
     order:2;
     width:50%;
 }
+.card-text{
+    max-height: 150px;
+    margin:5px 5px;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
 .right-side{
     order:3;
     width: 35%;
