@@ -49,7 +49,7 @@ async function getTodayTasks(userid) {
   const date = new Date().toISOString().split("T")[0];
   return await pool
     .query(
-      "SELECT * FROM tasks WHERE uid = ? AND done = 0 AND created = ? ORDER BY created DESC",
+      "SELECT * FROM tasks WHERE uid = ? AND done = 0 AND created = ? ORDER BY start ASC",
       [userid, date]
     )
     .then(([rows]) => {
@@ -63,7 +63,7 @@ async function getTodayTasks(userid) {
 async function getAllTasks(userid) {
   return await pool
     .query(
-      "SELECT * FROM tasks WHERE uid = ? AND done = 0 ORDER BY created DESC",
+      "SELECT * FROM tasks WHERE uid = ? AND done = 0 ORDER BY start ASC",
       [userid]
     )
     .then(([rows]) => {
@@ -96,8 +96,7 @@ async function finishTask(taskid) {
     });
 }
 
-//TODO: get all tasks orderd by date [not done], get all task order by date [done]
-//TODO: add task, remove task
+//TODO: add task
 module.exports = {
   register,
   login,
