@@ -96,8 +96,7 @@ async function finishTask(taskid) {
     });
 }
 
-//TODO: get all tasks orderd by date [not done], get all task order by date [done]
-//TODO: add task, remove task
+//TODO: add task
 module.exports = {
   register,
   login,
