@@ -67,7 +67,7 @@ async function getAllTasks(userid) {
       [userid]
     )
     .then(([rows]) => {
-      return rows.length > 0 ? rows : null;
+      return rows.length > 0 ? rows : [];
     })
     .catch((error) => {
       return error;

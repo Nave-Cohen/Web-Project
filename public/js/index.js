@@ -37,18 +37,3 @@ function deleteClicked(taskid) {
       alert("Error when trying to DELETE request");
     });
 }
-
-$("#search-input").focus(() => {
-  $(".sidebar").addClass("on-search");
-});
-$("#search-input").focusout(() => {
-  $(".sidebar").removeClass("on-search");
-});
-$("#menu-icon").click(function () {
-  if ($(this).hasClass("fa-solid fa-xmark")) {
-    $(this).attr("class", "fa-solid fa-bars");
-  } else {
-    $(this).attr("class", "fa-solid fa-xmark");
-  }
-  $(".sidebar").toggleClass("close");
-});
