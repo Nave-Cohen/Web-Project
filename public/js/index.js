@@ -52,3 +52,25 @@ $("#menu-icon").click(function () {
   }
   $(".sidebar").toggleClass("close");
 });
+$("#upcoming-element").click(() => {
+  window.location.href = "/tasks/upcoming";
+});
+$("#today-element").click(() => {
+  window.location.href = "/tasks/today";
+});
+$("#done-element").click(() => {
+  window.location.href = "/tasks/done";
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const urlPath = window.location.pathname;
+  const tasksHeader = document.getElementById("tasks-header");
+
+  if (urlPath === "/tasks/today") {
+    tasksHeader.textContent = "Today Tasks";
+  } else if (urlPath === "/tasks/upcoming") {
+    tasksHeader.textContent = "Upcoming Tasks";
+  } else if (urlPath === "/tasks/done") {
+    tasksHeader.textContent = "Done Tasks";
+  }
+});

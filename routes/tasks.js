@@ -4,6 +4,7 @@ const { Router } = require("express"),
     deleteTask,
     finishTask,
     getTodayTasks,
+    getDoneTasks,
   } = require("../services/db.service"),
   { Tasks } = require("../entities/task");
 
@@ -31,6 +32,13 @@ router.get("/today", async function (req, res) {
     tasks: htmlTasks,
     doneTasks: htmlDoneTasks,
   });
+});
+
+router.get("/done", async function (req, res) {
+  var todayTasks = await getDoneTasks(req.session.user.id);
+  var tasks = new Tasks(todayTasks);
+  var html = await tasks.toHtml();
+  res.render("../views/ejs/index.ejs", { tasks: html });
 });
 
 router.delete("/", async function (req, res) {

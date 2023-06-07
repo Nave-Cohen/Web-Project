@@ -73,29 +73,31 @@ async function getTodayTasks(userid) {
 }
 
 async function getAllTasks(userid) {
-  const tasksQuery = pool.query(
-    "SELECT * FROM tasks WHERE uid = ? AND done = 0 ORDER BY start ASC",
-    [userid]
-  );
+  return await pool
+    .query(
+      "SELECT * FROM tasks WHERE uid = ? AND done = 0 ORDER BY start ASC",
+      [userid]
+    )
+    .then(([rows]) => {
+      return rows.length > 0 ? rows : [];
+    })
+    .catch((error) => {
+      return error;
+    });
+}
 
-  const otherQuery = pool.query(
-    "SELECT * FROM tasks WHERE uid = ? AND done = 1 ORDER BY start ASC",
-    [userid]
-  );
-
-  try {
-    const [tasksResult, otherResult] = await Promise.all([
-      tasksQuery,
-      otherQuery,
-    ]);
-
-    const tasks = tasksResult[0].length > 0 ? tasksResult[0] : [];
-    const doneTasks = otherResult[0].length > 0 ? otherResult[0] : [];
-
-    return { tasks, doneTasks };
-  } catch (error) {
-    return error;
-  }
+async function getDoneTasks(userid) {
+  return await pool
+    .query(
+      "SELECT * FROM tasks WHERE uid = ? AND done = 1 ORDER BY start ASC",
+      [userid]
+    )
+    .then(([rows]) => {
+      return rows.length > 0 ? rows : [];
+    })
+    .catch((error) => {
+      return error;
+    });
 }
 
 async function deleteTask(taskid) {
@@ -129,4 +131,5 @@ module.exports = {
   deleteTask,
   finishTask,
   getTodayTasks,
+  getDoneTasks,
 };

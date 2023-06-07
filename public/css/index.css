@@ -86,13 +86,13 @@ body,main{
 .middle{
     margin: 0 10px;
     order:2;
-    width:50%;
+    width:80%;
+    text-align: center;
 }
-.right-side{
-    order:3;
-    width: 35%;
-    border: 1px solid blue;
+.accordion-header{
+    border: 1px solid #123;
 }
+
 @media only screen and (max-width: 600px) {
     .sidebar.close{
         width:10%;
@@ -115,7 +115,5 @@ body,main{
     .sidebar.close .badge,.sidebar.close #search-item,.sidebar.close medium{
         display:none;
     }
-    .right-side{
-        display:none;
-    }
+
 }

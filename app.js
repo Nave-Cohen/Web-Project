@@ -15,7 +15,7 @@ app.use("/public", express.static(`${__dirname}/public`));
 app.use(sessions);
 
 app.get("/", jwt, async (req, res) => {
-  res.redirect("tasks/upcoming");
+  res.redirect("tasks/today");
 });
 app.use("/users", users);
 

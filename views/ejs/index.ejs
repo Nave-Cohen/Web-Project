@@ -22,29 +22,25 @@
                 placeholder="Seach task"
               />
             </li>
-            <li class="list-item list-group-item">
-              <i class="icons fa-regular fa-calendar"></i>
-              <medium>Upcoming</medium>
-              <span class="badge bg-secondary">4</span>
-            </li>
-            <li class="list-item list-group-item">
+            <li class="list-item list-group-item" id="today-element">
               <i class="icons fa-regular fa-calendar-check"></i>
               <medium>Today</medium>
               <span class="badge bg-secondary">4</span>
             </li>
-            <li class="list-item list-group-item">
+            <li class="list-item list-group-item" id="upcoming-element">
+              <i class="icons fa-regular fa-calendar"></i>
+              <medium>Upcoming</medium>
+              <span class="badge bg-secondary">4</span>
+            </li>
+            <li class="list-item list-group-item" id="done-element">
               <i class="icons fa-solid fa-list-check"></i>
               <medium>Done</medium>
             </li>
           </ul>
         </div>
         <div class="middle">
-          <h2 id="menu-text">Tasks</h2>
+          <h2 id="tasks-header"></h2>
           <%- tasks %>
-        </div>
-        <div class="middle">
-          <h2 id="menu-text">Done</h2>
-          <%- doneTasks %>
         </div>
       </div>
     </main>
