@@ -11,16 +11,26 @@ const router = Router();
 
 router.get("/upcoming", async function (req, res) {
   var upcomingTasks = await getAllTasks(req.session.user.id);
-  var tasks = new Tasks(upcomingTasks);
-  var html = await tasks.toHtml();
-  res.render("../views/ejs/index.ejs", { tasks: html });
+  var tasks = new Tasks(upcomingTasks.tasks);
+  var doneTasks = new Tasks(upcomingTasks.doneTasks);
+  var htmlTasks = await tasks.toHtml();
+  var htmlDoneTasks = await doneTasks.toHtml();
+  res.render("../views/ejs/index.ejs", {
+    tasks: htmlTasks,
+    doneTasks: htmlDoneTasks,
+  });
 });
 
 router.get("/today", async function (req, res) {
   var todayTasks = await getTodayTasks(req.session.user.id);
-  var tasks = new Tasks(todayTasks);
-  var html = await tasks.toHtml();
-  res.render("../views/ejs/index.ejs", { tasks: html });
+  var tasks = new Tasks(todayTasks.tasks);
+  var doneTasks = new Tasks(todayTasks.doneTasks);
+  var htmlTasks = await tasks.toHtml();
+  var htmlDoneTasks = await doneTasks.toHtml();
+  res.render("../views/ejs/index.ejs", {
+    tasks: htmlTasks,
+    doneTasks: htmlDoneTasks,
+  });
 });
 
 router.delete("/", async function (req, res) {
