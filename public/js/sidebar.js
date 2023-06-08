@@ -2,24 +2,27 @@ $(".sidebar").prev().appendTo("head"); // Move <style> element to end of head
 $(".sidebar").next().appendTo("body"); // Move <script> element to end of body
 
 let animationFrameId;
+if (!window.matchMedia("(max-width: 600px)").matches) {
+  //on mobile
+  $(window).on("resize", function () {
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = requestAnimationFrame(checkWidth);
+  });
 
-$(window).on("resize", function () {
-  cancelAnimationFrame(animationFrameId);
-  animationFrameId = requestAnimationFrame(checkWidth);
-});
-let previousWidth = $(".sidebar").outerWidth();
-function checkWidth() {
-  const currentWidth = $(".sidebar").outerWidth();
-  if (currentWidth !== previousWidth) {
-    $(".sidebar")
-      .next()
-      .css("margin-left", currentWidth + "px");
+  let previousWidth = $(".sidebar").outerWidth();
+  function checkWidth() {
+    const currentWidth = $(".sidebar").outerWidth();
+    if (currentWidth !== previousWidth) {
+      $(".sidebar")
+        .next()
+        .css("margin-left", currentWidth + "px");
+    }
+    previousWidth = currentWidth;
+    animationFrameId = requestAnimationFrame(checkWidth);
   }
-  previousWidth = currentWidth;
+
   animationFrameId = requestAnimationFrame(checkWidth);
 }
-
-animationFrameId = requestAnimationFrame(checkWidth);
 
 $("#search-input").focus(() => {
   $(".sidebar").addClass("on-search");

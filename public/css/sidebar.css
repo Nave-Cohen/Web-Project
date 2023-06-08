@@ -123,4 +123,7 @@ input[type="search"]:focus {
   .sidebar.on-search {
     width: 70%;
   }
+  .logout-btn {
+    margin-left: 5px;
+  }
 }
