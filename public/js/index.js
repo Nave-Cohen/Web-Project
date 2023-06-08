@@ -74,3 +74,9 @@ document.addEventListener("DOMContentLoaded", function () {
     tasksHeader.textContent = "Done Tasks";
   }
 });
+
+function editClicked(taskId) {
+  $("#editModal-" + taskId)
+    .prependTo("body")
+    .modal("show");
+}
