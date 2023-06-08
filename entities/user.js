@@ -1,4 +1,3 @@
-const dbService = require("../services/db.service");
 class User {
   constructor(user) {
     this.id = user.id;

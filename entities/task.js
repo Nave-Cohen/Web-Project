@@ -1,6 +1,7 @@
-const ejs = require("ejs");
-const path = require("path");
-const ejsPath = path.join(__dirname, "..", "views/partials/task.ejs");
+const ejs = require('ejs');
+const path = require('path');
+// eslint-disable-next-line no-undef
+const ejsPath = path.join(__dirname, '..', 'views/partials/task.ejs');
 
 class Task {
   constructor(task) {
@@ -31,7 +32,7 @@ class Task {
     const date = new Date(this.createdDate);
     const timeDiff = Math.floor((today - date) / 1000);
 
-    const units = ["year", "month", "week", "day", "hour", "minute", "second"];
+    const units = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'];
     const durations = [
       365.25 * 24 * 60 * 60,
       30.44 * 24 * 60 * 60,
@@ -50,16 +51,16 @@ class Task {
       }
     }
 
-    return "Just now";
+    return 'Just now';
   }
   convertToMysqlDateTime(dateStr) {
     const date = new Date(dateStr);
     const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
-    const hours = date.getHours().toString().padStart(2, "0");
-    const minutes = date.getMinutes().toString().padStart(2, "0");
-    const seconds = date.getSeconds().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const seconds = date.getSeconds().toString().padStart(2, '0');
 
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
@@ -70,7 +71,7 @@ class Task {
       return html;
     } catch (err) {
       console.error(err);
-      return "";
+      return '';
     }
   }
 }
@@ -86,7 +87,7 @@ class Tasks {
       })
     );
 
-    const accordionHtml = htmlArray.join("");
+    const accordionHtml = htmlArray.join('');
 
     const wrappedHtml = `
       <div class="accordion" id="accordion">

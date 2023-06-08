@@ -7,7 +7,9 @@ async function clearDb() {
     try {
       // Clean up the inserted data
       await pool.query("DELETE FROM users WHERE username = ?", [user]);
-    } catch {}
+    } catch {
+      /* empty */
+    }
   }
 }
 before(async () => {

@@ -9,7 +9,7 @@
   "scripts": {
     "start": "npm run build & npm run scss & node app.js",
     "scss": "node-sass --include-path scss public/css/style.scss public/css/style.css",
-    "dev": "npm run build & npm run scss & nodemon app.js",
+    "dev": " npx eslint . & npm run build & npm run scss & nodemon app.js",
     "tests": "mocha --recursive --reporter spec --exit",
     "build": "dotenv -- run-script-os",
     "build:win32": "mysql -h %DB_HOST% -u %DB_USER% -p%DB_PASS% < %INIT_CWD%/configs/init.sql",
@@ -35,6 +35,7 @@
   "devDependencies": {
     "chai": "^4.3.7",
     "dotenv-cli": "^7.2.1",
+    "eslint": "^8.42.0",
     "mocha": "^10.2.0",
     "run-script-os": "^1.1.6",
     "supertest": "^6.3.3"
