@@ -3,14 +3,8 @@ $(".sidebar").next().appendTo("body"); // Move <script> element to end of body
 
 let animationFrameId;
 if (!window.matchMedia("(max-width: 600px)").matches) {
-  //on mobile
-  $(window).on("resize", function () {
-    cancelAnimationFrame(animationFrameId);
-    animationFrameId = requestAnimationFrame(checkWidth);
-  });
-
   let previousWidth = $(".sidebar").outerWidth();
-  function checkWidth() {
+  setInterval(function () {
     const currentWidth = $(".sidebar").outerWidth();
     if (currentWidth !== previousWidth) {
       $(".sidebar")
@@ -18,10 +12,7 @@ if (!window.matchMedia("(max-width: 600px)").matches) {
         .css("margin-left", currentWidth + "px");
     }
     previousWidth = currentWidth;
-    animationFrameId = requestAnimationFrame(checkWidth);
-  }
-
-  animationFrameId = requestAnimationFrame(checkWidth);
+  }, 10);
 }
 
 $("#search-input").focus(() => {
