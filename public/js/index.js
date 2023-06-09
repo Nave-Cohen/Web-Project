@@ -8,7 +8,7 @@ function doneClicked(taskid) {
   })
     .then((response) => {
       if (response.ok) {
-        location.reload(); // Refresh the page
+        location.reload();
       } else {
         alert("There was an error when trying to finish a task");
       }
@@ -28,7 +28,7 @@ function deleteClicked(taskid) {
   })
     .then((response) => {
       if (response.ok) {
-        location.reload(); // Refresh the page
+        location.reload();
       } else {
         alert("There was an error when trying to delete");
       }

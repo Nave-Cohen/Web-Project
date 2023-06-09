@@ -19,7 +19,7 @@
                 type="text"
                 class="form-control"
                 id="search-input"
-                placeholder="Seach task"
+                placeholder="Search task"
               />
             </li>
             <li class="list-item list-group-item" id="today-element">
@@ -39,7 +39,13 @@
           </ul>
         </div>
         <div class="middle">
-          <h2 id="tasks-header"></h2>
+          <div class="header">
+            <h2 id="tasks-header"></h2>
+            <button class="add-button">
+              <i class="far fa-calendar-plus" style="font-size: 20px"></i
+              >&nbsp;&nbsp; New Task
+            </button>
+          </div>
           <%- tasks %>
         </div>
       </div>
