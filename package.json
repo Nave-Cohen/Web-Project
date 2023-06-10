@@ -3,15 +3,13 @@
   "version": "1.0.0",
   "decription": "",
   "main": "app.js",
-  "keywords": [],
   "author": "Nave-Cohen <nave.cohen@e.braude.ac.il>",
   "license": "MIT",
   "scripts": {
     "start": "npm run build & npm run scss & node app.js",
     "scss": "node-sass --include-path scss public/css/style.scss public/css/style.css",
-    "dev": "npm run eslint && npm run devCmd || npm run devCmd",
-    "devCmd": "npm run build & npm run scss & nodemon app.js",
-    "eslint": "npx eslint .",
+    "dev": "npm run build && npm run scss && nodemon app.js",
+    "lint": "npx eslint .",
     "tests": "mocha --recursive --reporter spec --exit",
     "build": "dotenv -- run-script-os",
     "build:win32": "mysql -h %DB_HOST% -u %DB_USER% -p%DB_PASS% < %INIT_CWD%/configs/init.sql",
@@ -40,7 +38,7 @@
   "nodemonConfig": {
     "ext": "ejs,scss,js",
     "events": {
-      "restart": "npm run scss && echo 'Server restarted due to changes'"
+      "restart": "echo Server restarted due to changes"
     }
   }
 }
