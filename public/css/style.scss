@@ -1,11 +1,13 @@
+
+
 $primary: rgb(88,53,154) !default;
-// scss-docs-start nav-variables
 
 $nav-tabs-border-width:             0 !default;
 $nav-link-color:                    $primary !default;
 $nav-tabs-link-active-color:        white !default;
 $nav-tabs-link-active-bg:           $primary !default;
 
+$list-group-border-width:0;
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
