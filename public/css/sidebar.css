@@ -12,7 +12,7 @@
 
 .sidebar {
   position: fixed;
-  width: 20%;
+  max-width: 230px;
   height: 110%;
   background-color: var(--sidebar-bg);
   z-index: 2;
@@ -127,7 +127,7 @@ input[type="search"]:focus {
   box-shadow: 0 0 0 1px rgba(109, 34, 248, 0.35);
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 640px) {
   .sidebar.close {
     width: 10%;
   }
@@ -140,7 +140,10 @@ input[type="search"]:focus {
     width: 70%;
   }
   #logout-item {
-    top: 82.5%;
+    top: 83.5%;
     left: 6%;
+  }
+  .sidebar.close #logout-item {
+    top: 84.5%;
   }
 }

@@ -2,7 +2,7 @@ const $sidebar = $(".sidebar");
 
 let previousWidth = $sidebar.outerWidth();
 $sidebar.next().css("margin-left", previousWidth + "px");
-if (!window.matchMedia("(max-width: 600px)").matches) {
+if (!window.matchMedia("(max-width: 640px)").matches) {
   //on pc
   setInterval(function () {
     const currentWidth = $sidebar.outerWidth();
