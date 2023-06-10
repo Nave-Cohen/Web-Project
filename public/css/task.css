@@ -3,11 +3,14 @@
   --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
 
   --bs-accordion-btn-focus-box-shadow: 0 0 0 0;
-  --bs-accordion-active-bg: rgba(89, 99, 230, 0.884);
   --bs-accordion-active-color: white;
-  --bs-accordion-bg: rgba(141, 148, 243, 0.884);
   --bs-accordion-color: white;
   --bs-accordion-btn-color: white;
+  --bs-accordion-btn-active-color: white;
+  --bs-accordion-btn-bg: #875dc5;
+  --bs-accordion-bg: #875dc5;
+  --bs-accordion-btn-active-bg: #563d7c;
+  --bs-accordion-active-bg: #563d7c;
 }
 .accordion {
   display: flex;
@@ -18,12 +21,19 @@
 [class*="accordion-item-"] {
   width: 80%;
   margin: 20px 10px;
+  border-radius: 15px;
+  background-color: #7952b313;
 }
+
 .accordion-button {
   border-radius: 15px;
 }
 
 .card-text {
   max-height: 150px;
-  margin: 5px 5px;
+  margin: 5px 10px;
+}
+.footer {
+  margin: 0 10px;
+  padding-bottom: 10px;
 }

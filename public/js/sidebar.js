@@ -1,5 +1,14 @@
 const $sidebar = $(".sidebar");
 
+const title = window.location.href.split("/").slice(-1)[0];
+console.log(title);
+
+$("medium").each(function () {
+  if (title.toLowerCase() === $(this).text().toLowerCase()) {
+    $(this).parent().addClass("active");
+  }
+});
+
 let previousWidth = $sidebar.outerWidth();
 $sidebar.next().css("margin-left", previousWidth + "px");
 if (!window.matchMedia("(max-width: 640px)").matches) {

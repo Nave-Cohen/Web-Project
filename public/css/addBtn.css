@@ -1,0 +1,17 @@
+#addBtn {
+  position: fixed;
+  top: 92%;
+  left: 96%;
+  font-size: 25px;
+  padding: 15px 15px;
+  background-color: #563d7c;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+@media only screen and (max-width: 640px) {
+  #addBtn {
+    top: 90%;
+    left: 85%;
+  }
+}

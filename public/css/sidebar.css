@@ -12,7 +12,7 @@
 
 .sidebar {
   position: fixed;
-  max-width: 230px;
+  width: 20%;
   height: 110%;
   background-color: var(--sidebar-bg);
   z-index: 2;
@@ -85,7 +85,9 @@
   color: var(--sidebar-item-color);
   cursor: pointer;
 }
-
+.list-item.active {
+  background-color: #66419d;
+}
 .list-item:hover {
   background-color: var(--sidebar-item-bg-hover);
 }
@@ -133,17 +135,17 @@ input[type="search"]:focus {
   }
 
   .sidebar {
-    width: 50%;
+    width: 60%;
   }
 
   .sidebar.on-search {
-    width: 70%;
+    width: 80%;
   }
   #logout-item {
-    top: 83.5%;
+    top: 84%;
     left: 6%;
   }
   .sidebar.close #logout-item {
-    top: 84.5%;
+    top: 86.5%;
   }
 }

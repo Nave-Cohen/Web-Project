@@ -9,6 +9,15 @@ $nav-tabs-link-active-bg:           $primary !default;
 
 $list-group-border-width:0;
 
+
+$accordion-border-width:0;
+$accordion-button-focus-box-shadow:0 0 0 0;
+$accordion-button-color:white;
+$accordion-button-bg: rgb(89, 98, 230);
+$accordion-button-active-bg:rgb(141, 148, 243);
+$accordion-button-active-color:white;
+
+
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 
