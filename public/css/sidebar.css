@@ -13,10 +13,11 @@
 .sidebar {
   position: fixed;
   width: 20%;
-  height: 110%;
+  height: 100%;
   background-color: var(--sidebar-bg);
   z-index: 2;
   transition: width 0.3s ease;
+  transform: translate3d(0, 0, 0);
 }
 
 .sidebar.close {
@@ -111,13 +112,13 @@ input[type="search"]:focus {
 
 #logout-item {
   position: absolute;
-  top: 86%;
+  top: 95%;
   left: 4%;
-
   cursor: pointer;
+  transform: translate3d(0, 0, 0);
 }
 .sidebar.close #logout-item {
-  top: 88%;
+  top: 97%;
 }
 
 .logout-btn {
@@ -142,10 +143,9 @@ input[type="search"]:focus {
     width: 80%;
   }
   #logout-item {
-    top: 84%;
-    left: 6%;
+    top: 93.5%;
   }
   .sidebar.close #logout-item {
-    top: 86.5%;
+    top: 96%;
   }
 }
