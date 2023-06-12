@@ -4,6 +4,13 @@ const { Router } = require("express"),
 
 const router = Router();
 
+router.use("/:query", (req, res, next) => {
+  if (req.session.user && req.params.query !== "logout") {
+    res.redirect("/");
+  } else {
+    next();
+  }
+});
 //render login
 router.get("/signin", function (req, res) {
   renderSignTabs(res, "signin", "signup");
@@ -12,6 +19,9 @@ router.get("/signin", function (req, res) {
 router.post("/signin", async function (req, res) {
   var user = await dbService.login(req.body.username, req.body.password);
   if (user) {
+    if (req.body.checkbox) {
+      req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 365;
+    }
     req.session.user = new User(user);
     res.redirect("/");
   } else {
@@ -48,6 +58,7 @@ function renderSignTabs(res, activeTab, inactiveTab) {
 }
 //render logout
 router.get("/logout", function (req, res) {
+  res.clearCookie("connect.sid");
   req.session.destroy();
   res.redirect("/users/signin");
 });
