@@ -5,7 +5,7 @@ const $menuIcon = $("#menu-icon");
 const $listItems = $(".list-item");
 const $logoutItem = $("#logout-item");
 
-const title = window.location.href.split("/").slice(-1)[0];
+const title = document.title;
 
 $(`medium:contains(${title})`).parent().addClass("active");
 
