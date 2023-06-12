@@ -27,19 +27,10 @@ router.get("/done", async function (req, res) {
   var doneTasks = await getDoneTasks(req.session.user.id);
   var tasks = new Tasks(doneTasks);
   var html = await tasks.toHtml();
-  res.render("../views/ejs/index.ejs", { tasks: html });
+  res.render("../views/ejs/index.ejs", { tasks: html, title: "Done" });
 });
 
-router.post("/done", async function (req, res) {
-  try {
-    await finishTask(req.body.id);
-    res.sendStatus(204);
-  } catch {
-    res.sendStatus(500);
-  }
-});
-
-router.delete("/delete", async function (req, res) {
+router.delete("/", async function (req, res) {
   try {
     await deleteTask(req.body.id);
     res.sendStatus(204);
@@ -48,4 +39,12 @@ router.delete("/delete", async function (req, res) {
   }
 });
 
+router.post("/", async function (req, res) {
+  try {
+    await finishTask(req.body.id);
+    res.sendStatus(204);
+  } catch {
+    res.sendStatus(500);
+  }
+});
 module.exports = router;
