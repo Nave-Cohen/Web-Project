@@ -2,6 +2,21 @@ main {
   position: fixed;
   overflow-y: auto;
   inset: 0;
+  background-image: url("../images/index-bg-opacity.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#content-title {
+  margin-left: 10%;
+}
+#task-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  opacity: 0.4;
 }
 /* width */
 ::-webkit-scrollbar {
@@ -24,4 +39,7 @@ main {
 }
 
 @media only screen and (max-width: 600px) {
+  #task-placeholder {
+    left: 55%;
+  }
 }

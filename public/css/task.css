@@ -11,6 +11,17 @@
   --bs-accordion-bg: #875dc5;
   --bs-accordion-btn-active-bg: #563d7c;
   --bs-accordion-active-bg: #563d7c;
+  --bs-accordion-btn-focus-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+@keyframes items {
+  from {
+    margin: 0;
+    opacity: 0;
+  }
+  to {
+    margin: 20px 10px;
+    opacity: 1;
+  }
 }
 .accordion {
   display: flex;
@@ -21,12 +32,29 @@
 [class*="accordion-item-"] {
   width: 80%;
   margin: 20px 10px;
-  border-radius: 15px;
-  background-color: #7952b313;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8.3px);
+  -webkit-backdrop-filter: blur(8.3px);
+  border-radius: 10px;
+  animation-name: items;
+  animation-duration: 4s;
 }
 
 .accordion-button {
-  border-radius: 15px;
+  background: rgba(83, 36, 154, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 10px;
+}
+.accordion-button:not(.collapsed) {
+  background: rgba(86, 61, 124, 0.4);
+}
+.accordion-button:focus,
+button:focus:not(:focus-visible),
+button:focus-visible {
+  z-index: 3;
 }
 
 .card-text {
