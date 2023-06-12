@@ -10,6 +10,7 @@ class Task {
     this.content = task.content;
     this.start = task.start;
     this.createdDate = task.created;
+    this.done = task.done;
     // TODO: add task start time
   }
 

@@ -4,6 +4,7 @@ const { Router } = require("express"),
     deleteTask,
     finishTask,
     getTodayTasks,
+    getDoneTasks,
   } = require("../services/db.service"),
   { Tasks } = require("../entities/task");
 
@@ -22,7 +23,23 @@ router.get("/today", async function (req, res) {
   res.render("../views/ejs/index.ejs", { tasks: html, title: "Today" });
 });
 
-router.delete("/", async function (req, res) {
+router.get("/done", async function (req, res) {
+  var doneTasks = await getDoneTasks(req.session.user.id);
+  var tasks = new Tasks(doneTasks);
+  var html = await tasks.toHtml();
+  res.render("../views/ejs/index.ejs", { tasks: html });
+});
+
+router.post("/done", async function (req, res) {
+  try {
+    await finishTask(req.body.id);
+    res.sendStatus(204);
+  } catch {
+    res.sendStatus(500);
+  }
+});
+
+router.delete("/delete", async function (req, res) {
   try {
     await deleteTask(req.body.id);
     res.sendStatus(204);
@@ -31,12 +48,4 @@ router.delete("/", async function (req, res) {
   }
 });
 
-router.post("/", async function (req, res) {
-  try {
-    await finishTask(req.body.id);
-    res.sendStatus(204);
-  } catch {
-    res.sendStatus(500);
-  }
-});
 module.exports = router;

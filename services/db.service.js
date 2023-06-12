@@ -74,6 +74,20 @@ async function getAllTasks(userid) {
     });
 }
 
+async function getDoneTasks(userid) {
+  return await pool
+    .query(
+      "SELECT * FROM tasks WHERE uid = ? AND done = 1 ORDER BY start ASC",
+      [userid]
+    )
+    .then(([rows]) => {
+      return rows.length > 0 ? rows : [];
+    })
+    .catch((error) => {
+      return error;
+    });
+}
+
 async function deleteTask(taskid) {
   return await pool
     .query("DELETE FROM tasks WHERE id = ?", [taskid])
@@ -105,4 +119,5 @@ module.exports = {
   deleteTask,
   finishTask,
   getTodayTasks,
+  getDoneTasks,
 };

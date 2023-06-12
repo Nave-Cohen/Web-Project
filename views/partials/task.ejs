@@ -39,6 +39,24 @@
               class="dropdown-menu"
               aria-labelledby="dropdownMenuLink-<%=task.id%>"
             >
+              <% if (task.done === 1) { %>
+              <li>
+                <button
+                  class="dropdown-item"
+                  onclick="deleteClicked('<%= task.id %>')"
+                >
+                  <i class="fa-sharp fa-solid fa-trash"></i>&nbsp;&nbsp; Delete
+                </button>
+              </li>
+              <% } else { %>
+              <li>
+                <button
+                  class="dropdown-item"
+                  onclick="editClicked('<%= task.id %>')"
+                >
+                  <i class="fa-sharp fa-solid fa-edit"></i>&nbsp;&nbsp; Edit
+                </button>
+              </li>
               <li>
                 <button
                   class="dropdown-item"
@@ -55,6 +73,7 @@
                   <i class="fa-sharp fa-solid fa-trash"></i>&nbsp;&nbsp; Delete
                 </button>
               </li>
+              <% } %>
             </ul>
           </div>
         </div>
