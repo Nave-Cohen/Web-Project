@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 function doneClicked(taskid) {
-  fetch(`/tasks`, {
+  fetch("/tasks", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -20,7 +20,7 @@ function doneClicked(taskid) {
 }
 
 function deleteClicked(taskid) {
-  fetch(`/tasks`, {
+  fetch("/tasks", {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
