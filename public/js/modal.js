@@ -7,7 +7,7 @@ const $datetimepicker = $('#datetimepicker');
 const $modal = $('#Modal');
 let minDateTime;
 
-function updateTask(task) {
+function updateRequest(task) {
   try {
     $.post('/tasks/update', task, function (task) {
       $(`.accordion-item-${task.id}`).remove();
@@ -17,7 +17,7 @@ function updateTask(task) {
     alert('modal update-item error');
   }
 }
-function addTask(task) {
+function addReqest(task) {
   try {
     $.post('/tasks/add', task, function () {
       location.reload();
@@ -38,7 +38,7 @@ function setStart() {
 }
 function validateDate() {
   minDateTime = getMinDate();
-  const selectedDateTime = new Date($(this).val());
+  const selectedDateTime = new Date($datetimepicker.val());
   const minDateTimeObj = new Date(minDateTime);
 
   if (selectedDateTime < minDateTimeObj) {
@@ -47,6 +47,7 @@ function validateDate() {
   }
   return true;
 }
+
 // eslint-disable-next-line no-unused-vars
 function showModal(_id = -1, title = '', content = '', start = '', created = '') {
   id = _id;
@@ -70,7 +71,7 @@ $('#close-modal-btn').click(function () {
 
 $('#sbmt-btn').click(function () {
   if (!validateDate()) {
-    alert('date wrong');
+    $('#alert-msg').removeClass('d-none');
     return;
   }
   const task = {
@@ -81,8 +82,8 @@ $('#sbmt-btn').click(function () {
   };
 
   if (id !== -1) {
-    updateTask(task);
+    updateRequest(task);
   } else {
-    addTask(task);
+    addReqest(task);
   }
 });
