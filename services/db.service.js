@@ -46,11 +46,14 @@ async function login(usernameOrEmail, password) {
 }
 
 async function getTodayTasks(userid) {
-  const date = new Date().toISOString().split("T")[0];
+  const today = new Date();
+  const startDateTime = today.toISOString().slice(0, 10) + " 00:00:00";
+  const endDateTime = today.toISOString().slice(0, 10) + " 23:59:59";
+
   return await pool
     .query(
-      "SELECT * FROM tasks WHERE uid = ? AND done = 0 AND created = ? ORDER BY start ASC",
-      [userid, date]
+      "SELECT * FROM tasks WHERE uid = ? AND done = 0 AND start >= ? AND start <= ? ORDER BY start ASC",
+      [userid, startDateTime, endDateTime]
     )
     .then(([rows]) => {
       return rows.length > 0 ? rows : [];
@@ -109,6 +112,32 @@ async function finishTask(taskid) {
       return error;
     });
 }
+async function updateTask(task) {
+  return await pool
+    .query(
+      "UPDATE `tasks` SET title = ?, content = ? ,start = ? ,created = NOW()  WHERE `id` = ?",
+      [task.title, task.content, task.start, task.id]
+    )
+    .then(([rows]) => {
+      return rows.affectedRows > 0;
+    })
+    .catch((error) => {
+      return error;
+    });
+}
+async function addTask(uid, task) {
+  return await pool
+    .query(
+      "INSERT INTO `tasks` (uid,title,content,start,created,done) VALUES (?,?,?,?,NOW(),0)",
+      [uid, task.title, task.content, task.start]
+    )
+    .then(([rows]) => {
+      return rows.affectedRows > 0;
+    })
+    .catch((error) => {
+      return error;
+    });
+}
 
 //TODO: add task
 module.exports = {
@@ -120,4 +149,6 @@ module.exports = {
   finishTask,
   getTodayTasks,
   getDoneTasks,
+  updateTask,
+  addTask,
 };
