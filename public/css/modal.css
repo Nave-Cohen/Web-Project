@@ -1,0 +1,22 @@
+#task-title {
+  background-color: #563d7c;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+input[type="datetime-local" i]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+input::-webkit-datetime-edit {
+  cursor: text;
+}
+.modal-header {
+  background-color: #563d7c;
+  color: white;
+}
+#task-content {
+  padding: 0 5px;
+  border: 1px solid #563d7c40;
+  border-radius: 10px;
+}
