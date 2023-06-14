@@ -2,7 +2,7 @@ main {
   position: fixed;
   overflow-y: auto;
   inset: 0;
-  background-image: url("../images/index-bg-opacity.png");
+  background-image: url('../images/index-bg-opacity.png');
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -21,6 +21,7 @@ main {
 }
 #content-title {
   margin-left: 10%;
+  animation: title-enter 2s;
 }
 #task-placeholder {
   position: absolute;
@@ -57,5 +58,13 @@ main {
   #addBtn {
     top: 90%;
     left: 85%;
+  }
+}
+@keyframes title-enter {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
   }
 }

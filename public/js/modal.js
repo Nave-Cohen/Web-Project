@@ -14,7 +14,7 @@ function updateTask(task) {
     });
     $modal.hide();
   } catch {
-    console.log('modal update-item error');
+    alert('modal update-item error');
   }
 }
 function addTask(task) {
@@ -25,19 +25,36 @@ function addTask(task) {
     });
     $modal.hide();
   } catch {
-    console.log('modal update-item error');
+    alert('modal update-item error');
   }
 }
+function getMinDate() {
+  return moment().tz('Asia/Jerusalem').format('YYYY-MM-DDTHH:mm');
+}
+function setStart() {
+  minDateTime = getMinDate();
+  $datetimepicker.attr('min', minDateTime);
+  $datetimepicker.val(minDateTime);
+}
+function validateDate() {
+  minDateTime = getMinDate();
+  const selectedDateTime = new Date($(this).val());
+  const minDateTimeObj = new Date(minDateTime);
 
+  if (selectedDateTime < minDateTimeObj) {
+    $(this).val(minDateTime);
+    return false;
+  }
+  return true;
+}
 // eslint-disable-next-line no-unused-vars
 function showModal(_id = -1, title = '', content = '', start = '', created = '') {
   id = _id;
   $title.val(title);
-  $content.text(content);
-  minDateTime = moment().tz('Asia/Jerusalem').format('YYYY-MM-DDTHH:mm');
-  $datetimepicker.attr('min', minDateTime);
-  $datetimepicker.val(start);
+  $content.val(content);
   $created.text(id !== -1 ? 'created - ' + created : created);
+  setStart();
+
   $modal.data('id', id);
   $modal
     .modal({
@@ -47,24 +64,19 @@ function showModal(_id = -1, title = '', content = '', start = '', created = '')
     .show();
 }
 
-$datetimepicker.on('input', function () {
-  const selectedDateTime = new Date($(this).val());
-  const minDateTimeObj = new Date(minDateTime);
-
-  if (selectedDateTime < minDateTimeObj) {
-    $(this).val(minDateTime);
-  }
-});
-
 $('#close-modal-btn').click(function () {
   $modal.hide();
 });
 
 $('#sbmt-btn').click(function () {
+  if (!validateDate()) {
+    alert('date wrong');
+    return;
+  }
   const task = {
     id,
     title: $title.val(),
-    content: $content.text(),
+    content: $content.val(),
     start: $datetimepicker.val(),
   };
 
