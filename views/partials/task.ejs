@@ -2,6 +2,7 @@
   class="accordion-item-<%=task.id%>"
   data-id="<%= task.id  %>"
   data-title="<%= task.title %>"
+  data-date="<%= task.createdDate %>"
 >
   <h2 class="accordion-header" id="heading-<%=task.id%>">
     <button
@@ -36,6 +37,7 @@
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
             <ul
+              style="z-index: 1001"
               class="dropdown-menu"
               aria-labelledby="dropdownMenuLink-<%=task.id%>"
             >
@@ -52,7 +54,7 @@
               <li>
                 <button
                   class="dropdown-item"
-                  onclick="editClicked('<%= task.id %>')"
+                  onclick="showModal('<%- task.id %>','<%- task.title %>','<%- task.content %>','<%- task.start %>','<%- task.created %>')"
                 >
                   <i class="fa-sharp fa-solid fa-edit"></i>&nbsp;&nbsp; Edit
                 </button>

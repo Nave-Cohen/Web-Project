@@ -2,10 +2,12 @@
 <html lang="en">
   <head>
     <%- include('../partials/head.ejs',{"title":title}) %>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script src="https://momentjs.com/downloads/moment-timezone-with-data.js"></script>
     <link rel="stylesheet" href="../../public/css/index.css" />
     <link rel="stylesheet" href="../../public/css/task.css" />
     <link rel="stylesheet" href="../../public/css/sidebar.css" />
-    <link rel="stylesheet" href="../../public/css/addBtn.css" />
+    <link rel="stylesheet" href="../../public/css/modal.css" />
   </head>
 
   <body>
@@ -15,12 +17,12 @@
         <h4 id="content-title" class="display-4"></h4>
         <div class="accordion" id="accordion"><%- tasks %></div>
       </div>
-      <%- include('../partials/addBtn.ejs') %>
+      <%- include("../partials/modal.ejs") %>
+      <i id="addBtn" class="fa-solid fa-plus" onclick="showModal()"></i>
     </main>
   </body>
-
-  <script src="../../public/js/task.js"></script>
   <script src="../../public/js/sidebar.js"></script>
-  <script src="../../public/js/addBtn.js"></script>
   <script src="../../public/js/index.js"></script>
+  <script src="../../public/js/modal.js"></script>
+  <script src="../../public/js/task.js"></script>
 </html>
