@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 function doneClicked(taskid) {
-  fetch("/tasks", {
+  fetch("/tasks/done", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -9,7 +9,7 @@ function doneClicked(taskid) {
   })
     .then((response) => {
       if (response.ok) {
-        location.reload(); // Refresh the page
+        $(`.accordion-item-${taskid}`).remove();
       } else {
         alert("There was an error when trying to finish a task");
       }
@@ -20,7 +20,7 @@ function doneClicked(taskid) {
 }
 
 function deleteClicked(taskid) {
-  fetch("/tasks", {
+  fetch("/tasks/delete", {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -29,7 +29,7 @@ function deleteClicked(taskid) {
   })
     .then((response) => {
       if (response.ok) {
-        location.reload(); // Refresh the page
+        $(`.accordion-item-${taskid}`).remove();
       } else {
         alert("There was an error when trying to delete");
       }
