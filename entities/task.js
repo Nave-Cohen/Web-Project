@@ -88,4 +88,4 @@ class Tasks {
   }
 }
 
-module.exports.Tasks = Tasks;
+module.exports = { Tasks, Task };

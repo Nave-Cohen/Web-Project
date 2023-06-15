@@ -16,13 +16,17 @@ const pool = PoolSingleton.getInstance();
 
 /* register users */
 async function register(username, email, password) {
-  return await pool
-    .query('INSERT INTO users (username,email,password) VALUES (?,?,?)', [username, email, password])
-    .then(([rows]) => {
-      return rows.affectedRows > 0;
+  const insertQuery = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
+  const selectQuery = 'SELECT * FROM users WHERE id = LAST_INSERT_ID()';
+
+  await pool
+    .query(insertQuery, [username, email, password])
+    .then(async () => {
+      const [rows] = await pool.query(selectQuery);
+      return rows.length > 0 ? rows[0] : null;
     })
-    .catch((error) => {
-      return error;
+    .catch(() => {
+      return null;
     });
 }
 
@@ -116,33 +120,20 @@ async function updateTask(task) {
       return rows.affectedRows > 0;
     })
     .catch((error) => {
-      return error;
+      throw Error(error);
     });
 }
 async function addTask(uid, task) {
-  return await pool
-    .query('INSERT INTO `tasks` (uid,title,content,start,created,done) VALUES (?,?,?,?,NOW(),0)', [
-      uid,
-      task.title,
-      task.content,
-      task.start,
-    ])
-    .then(([rows]) => {
-      return rows.affectedRows > 0;
-    })
-    .catch((error) => {
-      return error;
-    });
-}
-async function getLastTask(uid) {
-  return await pool
-    .query('SELECT * FROM tasks WHERE uid = ? ORDER BY ? DESC LIMIT 1', [uid, uid])
-    .then(([rows]) => {
-      return rows[0];
-    })
-    .catch((error) => {
-      return error;
-    });
+  const insertQuery = 'INSERT INTO `tasks` (uid, title, content, start, created, done) VALUES (?, ?, ?, ?, NOW(), 0)';
+  const selectQuery = 'SELECT * FROM tasks WHERE id = LAST_INSERT_ID()';
+
+  try {
+    await pool.query(insertQuery, [uid, task.title, task.content, task.start]);
+    const [rows] = await pool.query(selectQuery);
+    return rows.length > 0 ? rows[0] : null;
+  } catch (error) {
+    return null;
+  }
 }
 
 //TODO: add task
@@ -157,5 +148,4 @@ module.exports = {
   getDoneTasks,
   updateTask,
   addTask,
-  getLastTask,
 };

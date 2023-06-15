@@ -13,7 +13,7 @@
       aria-expanded="false"
       aria-controls="collapse-<%=task.id%>"
     >
-      <medium><%= task.title %></medium>
+      <medium id="title"><%= task.title %></medium>
     </button>
   </h2>
   <div
@@ -25,7 +25,7 @@
     <div class="card-<%=task.id%>">
       <div class="card-body">
         <div class="content mb-2 d-flex justify-content-between">
-          <p class="card-text overflow-auto"><%= task.content %></p>
+          <p id="content" class="card-text overflow-auto"><%= task.content %></p>
           <div class="dropdown dropdown-menu-start ms-auto">
             <button
               class="btn"
@@ -36,17 +36,10 @@
             >
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
-            <ul
-              style="z-index: 1001"
-              class="dropdown-menu"
-              aria-labelledby="dropdownMenuLink-<%=task.id%>"
-            >
+            <ul style="z-index: 1001" class="dropdown-menu" aria-labelledby="dropdownMenuLink-<%=task.id%>">
               <% if (task.done === 1) { %>
               <li>
-                <button
-                  class="dropdown-item"
-                  onclick="deleteClicked('<%= task.id %>')"
-                >
+                <button class="dropdown-item" onclick="deleteClicked('<%= task.id %>')">
                   <i class="fa-sharp fa-solid fa-trash"></i>&nbsp;&nbsp; Delete
                 </button>
               </li>
@@ -60,18 +53,12 @@
                 </button>
               </li>
               <li>
-                <button
-                  class="dropdown-item"
-                  onclick="doneClicked('<%= task.id %>')"
-                >
+                <button class="dropdown-item" onclick="doneClicked('<%= task.id %>')">
                   <i class="fa-solid fa-check"></i>&nbsp;&nbsp; Done
                 </button>
               </li>
               <li>
-                <button
-                  class="dropdown-item"
-                  onclick="deleteClicked('<%= task.id %>')"
-                >
+                <button class="dropdown-item" onclick="deleteClicked('<%= task.id %>')">
                   <i class="fa-sharp fa-solid fa-trash"></i>&nbsp;&nbsp; Delete
                 </button>
               </li>
@@ -80,8 +67,8 @@
           </div>
         </div>
         <div class="footer d-flex justify-content-between">
-          <small class="text-muted">start - <%= task.start%></small>
-          <small class="text-muted">created - <%= task.created%></small>
+          <small id="start" class="text-muted">start - <%= task.start%></small>
+          <small id="created" class="text-muted">created - <%= task.created%></small>
         </div>
       </div>
     </div>

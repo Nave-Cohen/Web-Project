@@ -1,6 +1,6 @@
 const { Router } = require('express'),
   dbService = require('../services/db.service'),
-  { Tasks } = require('../entities/task');
+  { Tasks, Task } = require('../entities/task');
 
 const router = Router();
 router.get('/upcoming', async function (req, res) {
@@ -24,15 +24,6 @@ router.get('/done', async function (req, res) {
   res.render('../views/ejs/index.ejs', { tasks: html, title: 'Done' });
 });
 
-router.delete('/delete', async function (req, res) {
-  try {
-    await dbService.deleteTask(req.body.id);
-    res.sendStatus(204);
-  } catch {
-    res.sendStatus(500);
-  }
-});
-
 router.post('/done', async function (req, res) {
   try {
     await dbService.finishTask(req.body.id);
@@ -42,31 +33,42 @@ router.post('/done', async function (req, res) {
   }
 });
 
+router.delete('/delete', async function (req, res) {
+  try {
+    await dbService.deleteTask(req.body.id);
+    res.sendStatus(204);
+  } catch {
+    res.sendStatus(500);
+  }
+});
+
 router.post('/update', async function (req, res) {
-  const task = {
-    id: req.body.id,
-    title: req.body.title,
-    content: req.body.content,
-    start: req.body.start,
-  };
+  const task = packTask(req.body);
   try {
     await dbService.updateTask(task);
-    res.sendStatus(200);
+    res.send(task);
   } catch {
     res.sendStatus(500);
   }
 });
 router.post('/add', async function (req, res) {
-  const task = {
-    title: req.body.title,
-    content: req.body.content,
-    start: req.body.start,
-  };
-  try {
-    await dbService.addTask(req.session.user.id, task);
-    res.sendStatus(200);
-  } catch {
+  const request = packTask(req.body);
+  const task_ = await dbService.addTask(req.session.user.id, request);
+  const task = new Task(task_);
+  const html = await task.toHtml();
+  if (task_) {
+    res.send(html);
+  } else {
     res.sendStatus(500);
   }
 });
+function packTask(body) {
+  return {
+    id: body.id,
+    title: body.title,
+    content: body.content,
+    start: body.start,
+    created: body.created,
+  };
+}
 module.exports = router;
