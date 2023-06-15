@@ -53,7 +53,10 @@ async function getTodayTasks(userid) {
       [userid, date]
     )
     .then(([rows]) => {
-      return rows.length > 0 ? rows : [];
+      return {
+        data: rows.length > 0 ? rows : [],
+        count: rows.length, //erik
+      };
     })
     .catch((error) => {
       return error;
@@ -67,7 +70,10 @@ async function getAllTasks(userid) {
       [userid]
     )
     .then(([rows]) => {
-      return rows.length > 0 ? rows : [];
+      return {
+        data: rows.length > 0 ? rows : [],
+        count: rows.length, //erik
+      };
     })
     .catch((error) => {
       return error;

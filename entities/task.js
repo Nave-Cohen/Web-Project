@@ -81,6 +81,7 @@ class Tasks {
   constructor(tasks) {
     this.tasks = tasks.map((task) => new Task(task));
   }
+
   async toHtml() {
     const htmlArray = await Promise.all(
       this.tasks.map(async (task) => {
@@ -93,6 +94,10 @@ class Tasks {
     const wrappedHtml = `${accordionHtml}`;
 
     return wrappedHtml;
+  }
+
+  getCount() {
+    return this.tasks.length;
   }
 }
 
