@@ -25,8 +25,8 @@ async function register(username, email, password) {
       const [rows] = await pool.query(selectQuery);
       return rows.length > 0 ? rows[0] : null;
     })
-    .catch(() => {
-      return null;
+    .catch((error) => {
+      return error;
     });
 }
 
