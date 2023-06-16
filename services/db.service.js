@@ -45,18 +45,42 @@ async function login(usernameOrEmail, password) {
     });
 }
 
-async function getTodayTasks(userid) {
-  const date = new Date().toISOString().split("T")[0];
+async function countTodayTasks(userid) {
   return await pool
     .query(
-      "SELECT * FROM tasks WHERE uid = ? AND done = 0 AND created = ? ORDER BY start ASC",
-      [userid, date]
+      "SELECT COUNT(*) as count FROM tasks WHERE uid = ? AND done = 0 AND DATE(start) = CURDATE() AND TIME(start) >= CURTIME()",
+      [userid]
     )
     .then(([rows]) => {
-      return {
-        data: rows.length > 0 ? rows : [],
-        count: rows.length, //erik
-      };
+      return rows[0].count;
+    })
+    .catch((error) => {
+      return error;
+    });
+}
+
+async function countUpcomingTasks(userid) {
+  return await pool
+    .query(
+      "SELECT COUNT(*) as count FROM tasks WHERE uid = ? AND done = 0 AND start >= NOW()",
+      [userid]
+    )
+    .then(([rows]) => {
+      return rows[0].count;
+    })
+    .catch((error) => {
+      return error;
+    });
+}
+
+async function getTodayTasks(userid) {
+  return await pool
+    .query(
+      "SELECT * FROM tasks WHERE uid = ? AND done = 0 AND DATE(start) = CURDATE() AND TIME(start) >= CURTIME() ORDER BY start ASC",
+      [userid]
+    )
+    .then(([rows]) => {
+      return rows.length > 0 ? rows : [];
     })
     .catch((error) => {
       return error;
@@ -66,14 +90,11 @@ async function getTodayTasks(userid) {
 async function getAllTasks(userid) {
   return await pool
     .query(
-      "SELECT * FROM tasks WHERE uid = ? AND done = 0 ORDER BY start ASC",
+      "SELECT * FROM tasks WHERE uid = ? AND done = 0 AND start >= NOW() ORDER BY start ASC",
       [userid]
     )
     .then(([rows]) => {
-      return {
-        data: rows.length > 0 ? rows : [],
-        count: rows.length, //erik
-      };
+      return rows.length > 0 ? rows : [];
     })
     .catch((error) => {
       return error;
@@ -126,4 +147,6 @@ module.exports = {
   finishTask,
   getTodayTasks,
   getDoneTasks,
+  countTodayTasks,
+  countUpcomingTasks,
 };

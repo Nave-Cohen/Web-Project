@@ -23,14 +23,6 @@ router.post("/signin", async function (req, res) {
       req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 365;
     }
     req.session.user = new User(user);
-
-    // erik
-    var upcomingTasks = await dbService.getAllTasks(req.session.user.id);
-    var todayTasks = await dbService.getTodayTasks(req.session.user.id);
-
-    req.session.totalUpcomingTasks = upcomingTasks.count;
-    req.session.totalTodayTasks = todayTasks.count;
-
     res.redirect("/");
   } else {
     renderSignTabs(res, "signin", "signup");
