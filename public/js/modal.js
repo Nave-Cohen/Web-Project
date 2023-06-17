@@ -123,7 +123,7 @@ function showModal(_id = -1, title = '', content = '', start = '', created = '')
     .show();
 }
 
-$('close-modal-btn').click(function () {
+$('#close-modal-btn').click(function () {
   $modal.hide();
 });
 
