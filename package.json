@@ -8,7 +8,7 @@
   "scripts": {
     "start": "npm run build & npm run scss & node app.js",
     "scss": "node-sass --include-path scss public/css/style.scss public/css/style.css",
-    "dev": "npm run build && npm run scss && nodemon app.js",
+    "dev": "npm run scss && nodemon app.js",
     "lint": "npx eslint .",
     "tests": "mocha --recursive --reporter spec --exit",
     "build": "dotenv -- run-script-os",
@@ -40,6 +40,7 @@
   "nodemonConfig": {
     "ext": "ejs,scss,js",
     "events": {
+      "start": "npm run build",
       "restart": "echo Server restarted due to changes"
     }
   }
