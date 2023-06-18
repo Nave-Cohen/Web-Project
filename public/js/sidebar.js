@@ -2,7 +2,7 @@ const $sidebar = $('.sidebar');
 const $sidebarNext = $sidebar.next();
 const $searchInput = $('#search-input');
 const $menuIcon = $('#menu-icon');
-const $listItems = $('.list-item');
+const $listItems = $('.list-item:not(.user)');
 const $logoutItem = $('#logout-item');
 
 const title = document.title;
@@ -55,3 +55,17 @@ function getBadges() {
   );
 }
 setInterval(getBadges, 2500);
+
+// eslint-disable-next-line no-unused-vars
+function search(items) {
+  $searchInput.on('input', function () {
+    var inputValue = $(this).val().toLowerCase();
+    items.each(function () {
+      if (!$(this).data('title').toLowerCase().includes(inputValue)) {
+        $(this).hide();
+      } else {
+        $(this).show();
+      }
+    });
+  });
+}

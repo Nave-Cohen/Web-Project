@@ -129,7 +129,16 @@ input[type='search']:focus {
 .form-control:focus {
   box-shadow: 0 0 0 1px rgba(109, 34, 248, 0.35);
 }
-
+#user-icon {
+  color: var(--sidebar-item-bg);
+  background-color: white;
+  border-radius: 100%;
+  font-size: 17px;
+  padding: 7px;
+}
+#user-icon:hover {
+  color: var(--sidebar-item-bg-hover);
+}
 @media only screen and (max-width: 640px) {
   .sidebar.close {
     width: 10%;

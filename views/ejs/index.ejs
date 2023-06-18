@@ -10,7 +10,7 @@
 
   <body>
     <main>
-      <%- include('../partials/sidebar.ejs')%>
+      <%- include('../partials/sidebar.ejs',user)%>
       <div id="content" class="content" style="height: 100%; width: auto">
         <h4 id="content-title" class="display-4"></h4>
         <div class="accordion" id="accordion"><%- tasks %></div>

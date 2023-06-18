@@ -2,30 +2,30 @@ const { Router } = require('express'),
   dbService = require('../services/db.service'),
   router = Router();
 
-async function renderIndex(res, uid, html, title) {
+async function renderIndex(res, user, html, title) {
   res.render('../views/ejs/index.ejs', {
     tasks: html,
     title: title,
+    user: user,
   });
 }
-
 
 router.get('/upcoming', async function (req, res) {
   var upcomingTasks = await dbService.getAllTasks(req.session.user.id);
   var html = await upcomingTasks.toHtml();
-  renderIndex(res, req.session.user.id, html, req.url.split('/').slice(-1));
+  renderIndex(res, req.session.user, html, req.url.split('/').slice(-1));
 });
 
 router.get('/today', async function (req, res) {
   var todayTasks = await dbService.getTodayTasks(req.session.user.id);
   var html = await todayTasks.toHtml();
-  renderIndex(res, req.session.user.id, html, req.url.split('/').slice(-1));
+  renderIndex(res, req.session.user, html, req.url.split('/').slice(-1));
 });
 
 router.get('/completed', async function (req, res) {
   var doneTasks = await dbService.getDoneTasks(req.session.user.id);
   var html = await doneTasks.toHtml();
-  renderIndex(res, req.session.user.id, html, req.url.split('/').slice(-1));
+  renderIndex(res, req.session.user, html, req.url.split('/').slice(-1));
 });
 
 router.post('/done', async function (req, res) {
@@ -74,7 +74,6 @@ router.get('/updateBadge', async function (req, res) {
   const todayNum = await dbService.countTodayTasks(uid);
   res.send({ upcoming: upcomingNum, today: todayNum });
 });
-
 
 function packTask(body) {
   return {
