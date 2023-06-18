@@ -16,18 +16,25 @@ function updateTask(task) {
   $task.find('#start').text('start - ' + task.start.replace('T', ' '));
 }
 function addTask(task, response) {
-  if (
-    (location.href.toLowerCase().includes('today') && isToday(task.start)) ||
-    location.href.toLowerCase().includes('upcoming')
-  ) {
+  const currentHref = location.href.toLowerCase();
+  if (!currentHref.includes('done')) {
     const taskDate = new Date(task.start);
-    $("[class*='accordion-item-']").each(function () {
-      var compareDate = new Date($(this).find('#start').text().slice(7));
+    const accordionItems = document.querySelectorAll("[class*='accordion-item-']");
+    const accordion = $('#accordion');
+    let inserted = false;
+
+    for (const item of accordionItems) {
+      const compareDate = new Date($('#start', item).text().slice(7));
       if (taskDate < compareDate) {
-        $(this).before(response);
-        return;
+        $(item).before(response);
+        inserted = true;
+        break;
       }
-    });
+    }
+
+    if (!inserted) {
+      accordion.append(response);
+    }
   }
 }
 
@@ -60,16 +67,10 @@ function addReqest(task) {
 }
 
 function getMinDate() {
-  return moment().tz('Asia/Jerusalem').format('YYYY-MM-DDTHH:mm');
-}
-
-function isToday(date) {
-  const gotDate = new Date(date.slice(0, 16)).toISOString().slice(0, 10);
-  const today = getMinDate().slice(0, 10);
-  if (gotDate === today) {
-    return true;
-  }
-  return false;
+  const now = new Date();
+  const tzOffset = now.getTimezoneOffset() * 60000;
+  const minDateTimeObj = new Date(now - tzOffset);
+  return minDateTimeObj.toISOString().slice(0, 16);
 }
 
 function setStart() {

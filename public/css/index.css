@@ -21,7 +21,7 @@ main {
 }
 #content-title {
   margin-left: 10%;
-  animation: title-enter 2s;
+  animation: title-enter 1s;
 }
 #task-placeholder {
   position: absolute;

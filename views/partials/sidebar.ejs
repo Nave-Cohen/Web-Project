@@ -5,27 +5,21 @@
       <i id="menu-icon" class="fa-solid fa-bars"></i>
     </li>
     <li id="search-item" class="list-group-item">
-      <input
-        type="search"
-        class="form-control"
-        autocomplete="off"
-        id="search-input"
-        placeholder="Search task"
-      />
+      <input type="search" class="form-control" autocomplete="off" id="search-input" placeholder="Search task" />
     </li>
     <li class="list-item list-group-item">
-      <i class="icons fa-regular fa-calendar"></i>
-      <medium class="item-text">Upcoming</medium>
-      <span class="badge bg-danger text-white">4</span>
-    </li>
-    <li class="list-item list-group-item">
-      <i class="icons fa-regular fa-calendar-check"></i>
+      <i class="icons fa-solid fa-calendar-day"></i>
       <medium class="item-text">Today</medium>
-      <span class="badge bg-danger text-white">4</span>
+      <span id="today-badge" class="badge bg-danger text-white"></span>
+    </li>
+    <li class="list-item list-group-item">
+      <i class="icons fa-solid fa-calendar-days"></i>
+      <medium class="item-text">Upcoming</medium>
+      <span id="upcoming-badge" class="badge bg-danger text-white"></span>
     </li>
     <li class="list-item list-group-item">
       <i class="icons fa-solid fa-list-check"></i>
-      <medium class="item-text">Done</medium>
+      <medium class="item-text">Completed</medium>
     </li>
   </ul>
   <div id="logout-item" class="list-group-item d-flex flex-column">

@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-require("dotenv").config();
+require('dotenv').config();
 
 const options = {
   host: process.env.DB_HOST,

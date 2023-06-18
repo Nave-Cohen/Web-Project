@@ -1,8 +1,6 @@
 const { Router } = require('express'),
   dbService = require('../services/db.service'),
-  User = require('../entities/user');
-
-const router = Router();
+  router = Router();
 
 router.use('/:query', (req, res, next) => {
   if (req.session.user && req.params.query !== 'logout') {
@@ -22,7 +20,7 @@ router.post('/signin', async function (req, res) {
     if (req.body.checkbox) {
       req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 365;
     }
-    req.session.user = new User(user);
+    req.session.user = user;
     res.sendStatus(200);
   } else {
     res.sendStatus(500);
@@ -37,7 +35,7 @@ router.get('/signup', function (req, res) {
 router.post('/signup', async function (req, res) {
   var user = await dbService.register(req.body.username, req.body.email, req.body.password);
   if (user) {
-    req.session.user = new User(user);
+    req.session.user = user;
     res.sendStatus(200);
   } else {
     res.sendStatus(500);

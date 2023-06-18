@@ -97,16 +97,16 @@
   background-color: var(--sidebar-item-bg);
 }
 
-input[type="search"] {
+input[type='search'] {
   background-color: var(--search-input-bg);
   color: var(--search-input-color);
 }
 
-input[type="search"]::placeholder {
+input[type='search']::placeholder {
   color: var(--search-input-ph-color);
 }
 
-input[type="search"]:focus {
+input[type='search']:focus {
   border-color: transparent;
 }
 

@@ -29,7 +29,7 @@
   backdrop-filter: blur(8.3px);
   -webkit-backdrop-filter: blur(8.3px);
   border-radius: 10px;
-  animation: items 2s;
+  animation: items 1s;
 }
 
 .accordion-button {
