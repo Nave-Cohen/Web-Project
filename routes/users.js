@@ -2,6 +2,7 @@ const { Router } = require('express'),
   dbService = require('../services/db.service'),
   router = Router();
 
+
 router.use('/:query', (req, res, next) => {
   if (req.session.user && req.params.query !== 'logout') {
     res.redirect('/');
@@ -20,6 +21,7 @@ router.post('/signin', async function (req, res) {
     if (req.body.checkbox) {
       req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 365;
     }
+
     req.session.user = user;
     res.sendStatus(200);
   } else {

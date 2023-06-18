@@ -23,6 +23,7 @@ describe('db.services - register', () => {
   // Tests that the function successfully registers a new user with valid username, email, and password.
   it('test_register_successfully_registers_new_user', async () => {
     const result = await register('testuser', 'testuser@test.com', 'password123');
+
     expect(result instanceof User).equal(true);
   });
 

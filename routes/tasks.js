@@ -9,6 +9,7 @@ async function renderIndex(res, uid, html, title) {
   });
 }
 
+
 router.get('/upcoming', async function (req, res) {
   var upcomingTasks = await dbService.getAllTasks(req.session.user.id);
   var html = await upcomingTasks.toHtml();
@@ -36,9 +37,9 @@ router.post('/done', async function (req, res) {
   }
 });
 
-router.post('/done', async function (req, res) {
+router.delete('/delete', async function (req, res) {
   try {
-    await dbService.finishTask(req.body.id);
+    await dbService.deleteTask(req.body.id);
     res.sendStatus(204);
   } catch {
     res.sendStatus(500);
@@ -57,6 +58,7 @@ router.post('/update', async function (req, res) {
 
 router.post('/add', async function (req, res) {
   const request = packTask(req.body);
+
   const task = await dbService.addTask(req.session.user.id, request);
   if (task) {
     const html = await task.toHtml();
@@ -72,6 +74,7 @@ router.get('/updateBadge', async function (req, res) {
   const todayNum = await dbService.countTodayTasks(uid);
   res.send({ upcoming: upcomingNum, today: todayNum });
 });
+
 
 function packTask(body) {
   return {
