@@ -2,10 +2,11 @@ main {
   position: fixed;
   overflow-y: auto;
   inset: 0;
-  background-image: url('../images/index-bg-opacity.png');
+  background-image: url("../images/index-bg-opacity.png");
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 #addBtn {
   position: fixed;
   top: 92%;
@@ -18,6 +19,10 @@ main {
   border-radius: 50%;
   cursor: pointer;
   transform: translate3d(0, 0, 0);
+  transition: font-size 0.3s ease;
+}
+#addBtn:hover {
+  font-size: 30px;
 }
 #content-title {
   margin-left: 10%;
