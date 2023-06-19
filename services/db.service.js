@@ -73,6 +73,20 @@ async function countUpcomingTasks(userid) {
     });
 }
 
+async function countIncompletedTasks(userid) {
+  return await pool
+    .query(
+      "SELECT COUNT(*) as count FROM tasks WHERE uid = ? AND done = 0 AND start < NOW()",
+      [userid]
+    )
+    .then(([rows]) => {
+      return rows[0].count;
+    })
+    .catch((error) => {
+      return error;
+    });
+}
+
 async function getTodayTasks(userid) {
   return await pool
     .query(
@@ -101,10 +115,24 @@ async function getAllTasks(userid) {
     });
 }
 
-async function getDoneTasks(userid) {
+async function getCompletedTasks(userid) {
   return await pool
     .query(
       "SELECT * FROM tasks WHERE uid = ? AND done = 1 ORDER BY start ASC",
+      [userid]
+    )
+    .then(([rows]) => {
+      return rows.length > 0 ? rows : [];
+    })
+    .catch((error) => {
+      return error;
+    });
+}
+
+async function getIncompletedTasks(userid) {
+  return await pool
+    .query(
+      "SELECT * FROM tasks WHERE uid = ? AND done = 0 AND start < NOW() ORDER BY start ASC",
       [userid]
     )
     .then(([rows]) => {
@@ -137,7 +165,6 @@ async function finishTask(taskid) {
     });
 }
 
-//TODO: add task
 module.exports = {
   register,
   login,
@@ -146,7 +173,9 @@ module.exports = {
   deleteTask,
   finishTask,
   getTodayTasks,
-  getDoneTasks,
+  getCompletedTasks,
+  getIncompletedTasks,
   countTodayTasks,
   countUpcomingTasks,
+  countIncompletedTasks,
 };

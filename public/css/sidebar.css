@@ -30,20 +30,17 @@
 
 .sidebar.close .badge,
 .sidebar.close #menu-text,
-.sidebar.close #search-item,
-.sidebar.close .item-text {
+.sidebar.close #search-item {
   display: none;
 }
 .sidebar.close .list-item{
   flex-direction: column;
+  font-size: 12px;
 }
 
-.sidebar.open .item-title{
-  display: none;
-}
-.sidebar.open .list-item:hover .icons,
-.sidebar.open .list-item:hover .item-title {
-  animation: none;
+.sidebar.close .list-item:hover .icons,
+.sidebar.close .list-item:hover .item-text {
+  animation: shake 1s;
 }
 
 
@@ -101,7 +98,7 @@
 .list-item {
   display: flex;
   align-items: center;
-  padding-top: 17px;
+  padding: 15px 0 15px ;
   background-color: var(--sidebar-item-bg);
   color: var(--sidebar-item-color);
   cursor: pointer;
@@ -111,11 +108,6 @@
 
 .list-item.active {
   background-color: #66419d;
-}
-
-.list-item:hover .icons,
-.list-item:hover .item-title {
-  animation: shake 1s;
 }
 
 #search-item {
