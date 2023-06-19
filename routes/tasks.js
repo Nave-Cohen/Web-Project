@@ -1,97 +1,104 @@
 const { Router } = require("express"),
-  {
-    getAllTasks,
-    deleteTask,
-    finishTask,
-    getTodayTasks,
-    getCompletedTasks,
-    getIncompletedTasks,
-    countTodayTasks,
-    countUpcomingTasks,
-    countIncompletedTasks,
-  } = require("../services/db.service"),
-  { Tasks } = require("../entities/task");
+  dbService = require("../services/db.service"),
+  router = Router();
 
-const router = Router();
-
-router.use("/", async function (req, res, next) {
-  req.session.totalTodayTasks = await countTodayTasks(req.session.user.id);
-  req.session.totalUpcomingTasks = await countUpcomingTasks(
-    req.session.user.id
-  );
-  req.session.totalIncompletedTasks = await countIncompletedTasks(
-    req.session.user.id
-  );
-  next();
-});
-
-router.get("/today", async function (req, res) {
-  var todayTasks = await getTodayTasks(req.session.user.id);
-  var tasks = new Tasks(todayTasks);
-  var html = await tasks.toHtml();
+async function renderIndex(res, user, html, title) {
   res.render("../views/ejs/index.ejs", {
     tasks: html,
-    title: "Today",
-    totalUpcoming: req.session.totalUpcomingTasks,
-    totalToday: req.session.totalTodayTasks,
-    totalIncompleted: req.session.totalIncompletedTasks,
+    title: title,
+    user: user,
   });
+}
+
+router.get("/today", async function (req, res) {
+  var todayTasks = await dbService.getTodayTasks(req.session.user.id);
+  var html = await todayTasks.toHtml();
+  renderIndex(res, req.session.user, html, req.url.split("/").slice(-1));
 });
 
 router.get("/upcoming", async function (req, res) {
-  var upcomingTasks = await getAllTasks(req.session.user.id);
-  var tasks = new Tasks(upcomingTasks);
-  var html = await tasks.toHtml();
-  res.render("../views/ejs/index.ejs", {
-    tasks: html,
-    title: "Upcoming",
-    totalUpcoming: req.session.totalUpcomingTasks,
-    totalToday: req.session.totalTodayTasks,
-    totalIncompleted: req.session.totalIncompletedTasks,
-  });
+  var upcomingTasks = await dbService.getAllTasks(req.session.user.id);
+  var html = await upcomingTasks.toHtml();
+  renderIndex(res, req.session.user, html, req.url.split("/").slice(-1));
 });
 
 router.get("/incomplete", async function (req, res) {
-  var incompleteTasks = await getIncompletedTasks(req.session.user.id);
-  var tasks = new Tasks(incompleteTasks);
-  var html = await tasks.toHtml();
-  res.render("../views/ejs/index.ejs", {
-    tasks: html,
-    title: "Incompleted",
-    totalUpcoming: req.session.totalUpcomingTasks,
-    totalToday: req.session.totalTodayTasks,
-    totalIncompleted: req.session.totalIncompletedTasks,
-  });
+  var incompleteTasks = await dbService.getIncompletedTasks(req.session.user.id);
+  var html = await incompleteTasks.toHtml();
+  renderIndex(res, req.session.user, html, req.url.split("/").slice(-1));
 });
 
 router.get("/completed", async function (req, res) {
-  var completedTasks = await getCompletedTasks(req.session.user.id);
-  var tasks = new Tasks(completedTasks);
-  var html = await tasks.toHtml();
-  res.render("../views/ejs/index.ejs", {
-    tasks: html,
-    title: "Completed",
-    totalUpcoming: req.session.totalUpcomingTasks,
-    totalToday: req.session.totalTodayTasks,
-    totalIncompleted: req.session.totalIncompletedTasks,
-  });
+  var doneTasks = await dbService.getCompletedTasks(req.session.user.id);
+  var html = await doneTasks.toHtml();
+  renderIndex(res, req.session.user, html, req.url.split("/").slice(-1));
 });
 
-router.delete("/", async function (req, res) {
+router.post("/done", async function (req, res) {
   try {
-    await deleteTask(req.body.id);
+    await dbService.finishTask(req.body.id);
     res.sendStatus(204);
   } catch {
     res.sendStatus(500);
   }
 });
 
-router.post("/", async function (req, res) {
+router.delete("/delete", async function (req, res) {
   try {
-    await finishTask(req.body.id);
+    await dbService.deleteTask(req.body.id);
     res.sendStatus(204);
   } catch {
     res.sendStatus(500);
   }
 });
+
+router.post('/update', async function (req, res) {
+  const task = packTask(req.body);
+  try {
+    await dbService.updateTask(task);
+    res.send(task);
+  } catch {
+    res.sendStatus(500);
+  }
+});
+
+router.post('/add', async function (req, res) {
+  const request = packTask(req.body);
+
+  const task = await dbService.addTask(req.session.user.id, request);
+  if (task) {
+    const html = await task.toHtml();
+    res.send(html);
+  } else {
+    res.sendStatus(500);
+  }
+});
+
+router.get('/updateBadge', async function (req, res) {
+  const uid = req.session.user.id;
+  const todayNum = await dbService.countTodayTasks(uid);
+  const upcomingNum = await dbService.countUpcomingTasks(uid);
+  const incompletedNum = await dbService.countIncompletedTasks(uid);
+  res.send({ upcoming: upcomingNum, today: todayNum , incompleted: incompletedNum});
+});
+
+router.get("/closet", async function (req, res) {
+  const uid = req.session.user.id;
+  const closetTask = await dbService.getFirstTask(uid);
+  if (closetTask) {
+    res.send({ task: closetTask });
+  } else {
+    res.sendStatus(500);
+  }
+});
+
+function packTask(body) {
+  return {
+    id: body.id,
+    title: body.title,
+    content: body.content,
+    start: body.start,
+    created: body.created,
+  };
+}
 module.exports = router;

@@ -13,16 +13,6 @@
   --bs-accordion-active-bg: #563d7c;
   --bs-accordion-btn-focus-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
 }
-@keyframes items {
-  from {
-    margin: 0;
-    opacity: 0;
-  }
-  to {
-    margin: 20px 10px;
-    opacity: 1;
-  }
-}
 .accordion {
   display: flex;
   flex-direction: column;
@@ -73,12 +63,20 @@ button:focus-visible {
   align-items: center;
   width: 100%;
 }
-
 .title {
   order: 1;
   margin-right: auto;
 }
-
 .start {
   order: 2;
+}
+@keyframes items {
+  from {
+    margin: 0;
+    opacity: 0;
+  }
+  to {
+    margin: 20px 10px;
+    opacity: 1;
+  }
 }

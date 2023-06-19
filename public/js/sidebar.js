@@ -2,12 +2,20 @@ const $sidebar = $(".sidebar");
 const $sidebarNext = $sidebar.next();
 const $searchInput = $("#search-input");
 const $menuIcon = $("#menu-icon");
-const $listItems = $(".list-item");
+const $listItems = $(".list-item:not(.user)");
 const $logoutItem = $("#logout-item");
-
 const title = document.title;
 
-$(`medium:contains(${title})`).parent().addClass("active");
+getBadges();
+
+$(".item-text").each(function () {
+  var text = $(this).text().toLowerCase();
+  if (text.includes(title)) {
+    $(this).closest(".list-item").addClass("active");
+  } else {
+    $(this).closest(".list-item").removeClass("active");
+  }
+});
 
 let previousWidth = $sidebar.outerWidth();
 $sidebarNext.css("margin-left", previousWidth + "px");
@@ -20,7 +28,7 @@ if (!window.matchMedia("(max-width: 640px)").matches) {
       $sidebarNext.css("margin-left", currentWidth + "px");
     }
     previousWidth = currentWidth;
-  }, 10);
+  }, 5);
 }
 
 $searchInput.on("focus", function () {
@@ -34,7 +42,6 @@ $searchInput.on("focusout", function () {
 $menuIcon.on("click", function () {
   $sidebar.toggleClass("close");
   $menuIcon.toggleClass("fa-xmark fa-bars");
-  $sidebar.toggleClass("open");
 });
 
 $logoutItem.on("click", function () {
@@ -43,6 +50,31 @@ $logoutItem.on("click", function () {
 
 $listItems.on("click", function () {
   const url = $(this).find("medium").text();
-  console.log(url);
   window.location.href = "/tasks/" + url;
 });
+function getBadges() {
+  $.get(
+    "/tasks/updateBadge",
+    function (response) {
+      $("#today-badge").text(response.today);
+      $("#upcoming-badge").text(response.upcoming);
+      $("#incompleted-badge").text(response.incompleted);
+    },
+    "json"
+  );
+}
+setInterval(getBadges, 2500);
+
+// eslint-disable-next-line no-unused-vars
+function search(items) {
+  $searchInput.on("input", function () {
+    var inputValue = $(this).val().toLowerCase();
+    items.each(function () {
+      if (!$(this).data("title").toLowerCase().includes(inputValue)) {
+        $(this).hide();
+      } else {
+        $(this).show();
+      }
+    });
+  });
+}

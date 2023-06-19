@@ -87,6 +87,8 @@ UNLOCK TABLES;
 /*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+
+DROP PROCEDURE IF EXISTS `generate_random_rows`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `generate_random_rows`(IN num_rows INT)
 BEGIN

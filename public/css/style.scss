@@ -1,25 +1,14 @@
+$primary: rgb(88, 53, 154) !default;
+// scss-docs-start nav-variables
 
-
-$primary: rgb(88,53,154) !default;
-
-$nav-tabs-border-width:             0 !default;
-$nav-link-color:                    $primary !default;
-$nav-tabs-link-active-color:        white !default;
-$nav-tabs-link-active-bg:           $primary !default;
-
-$list-group-border-width:0;
-
-
-$accordion-border-width:0;
-$accordion-button-focus-box-shadow:0 0 0 0;
-$accordion-button-color:white;
-$accordion-button-bg: rgb(89, 98, 230);
-$accordion-button-active-bg:rgb(141, 148, 243);
-$accordion-button-active-color:white;
-
+$nav-tabs-border-width: 0 !default;
+$nav-link-color: $primary !default;
+$nav-tabs-link-active-color: white !default;
+$nav-tabs-link-active-bg: $primary !default;
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
+@import '../../node_modules/bootstrap/scss/bootstrap';
 
 /*
 @import "https://fonts.googleapis.com/css?family=Raleway:100,300,400|Roboto+Condensed:300,700&display=swap";

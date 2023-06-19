@@ -4,29 +4,28 @@
       <h2 id="menu-text">Menu</h2>
       <i id="menu-icon" class="fa-solid fa-bars"></i>
     </li>
+    <li class="list-item list-group-item">
+      <i class="icons user-initial square-shape larger-circle-font">
+        <%= user.name.charAt(0).toUpperCase() %>
+      </i>
+    </li>
     <li id="search-item" class="list-group-item">
-      <input
-        type="search"
-        class="form-control"
-        autocomplete="off"
-        id="search-input"
-        placeholder="Search task"
-      />
+      <input type="search" class="form-control" autocomplete="off" id="search-input" placeholder="Search task" />
     </li>
     <li class="list-item list-group-item">
       <i class="icons fa-solid fa-calendar-day"></i>
       <medium class="item-text">Today</medium>
-      <span class="badge bg-danger text-white"><%= totalToday %></span>
+      <span id="today-badge" class="badge bg-danger text-white"></span>
     </li>
     <li class="list-item list-group-item">
       <i class="icons fa-solid fa-calendar-days"></i>
       <medium class="item-text">Upcoming</medium>
-      <span class="badge bg-danger text-white"><%= totalUpcoming %></span>
+      <span id="upcoming-badge" class="badge bg-danger text-white"></span>
     </li>
     <li class="list-item list-group-item">
       <i class="icons fa-solid fa-calendar-xmark"></i>
       <medium class="item-text">Incomplete</medium>
-      <span class="badge bg-danger text-white"><%= totalIncompleted %></span>
+      <span id="incompleted-badge" class="badge bg-danger text-white"></span>
     </li>
     <li class="list-item list-group-item">
       <i class="icons fa-solid fa-list-check"></i>

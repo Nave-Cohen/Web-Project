@@ -12,16 +12,8 @@
           <h1 id="welcome-text" class="display-1">Welcome Back</h1>
         </div>
         <div class="child content">
-          <ul
-            class="nav nav-tabs justify-content-center"
-            id="myTab"
-            role="tablist"
-          >
-            <li
-              class="nav-item"
-              role="presentation"
-              onclick="updateUrl('signin')"
-            >
+          <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation" onclick="updateUrl('signin')">
               <a
                 class="nav-link <%= active === 'signin' ? 'active' : '' %>"
                 id="signin-tab"
@@ -33,11 +25,7 @@
                 >Signin</a
               >
             </li>
-            <li
-              class="nav-item"
-              role="presentation"
-              onclick="updateUrl('signup')"
-            >
+            <li class="nav-item" role="presentation" onclick="updateUrl('signup')">
               <a
                 class="nav-link <%= active === 'signup' ? 'active' : '' %>"
                 id="signup-tab"
@@ -75,39 +63,10 @@
     </main>
   </body>
 </html>
+<script src="../../public/js/sign-tabs.js"></script>
 <script>
-  var active = "<%= active %>";
-  if (active === "signup") {
+  var active = '<%= active %>';
+  if (active === 'signup') {
     replacePlaces(active);
-  }
-
-  function updateUrl(str) {
-    window.history.pushState(str, str.toUpperCase(), str);
-    replacePlaces(str);
-  }
-
-  function replacePlaces(str) {
-    var main = document.getElementById("main-container");
-    var content = main.querySelector(".content");
-    var img = main.querySelector(".img");
-    var welcome = main.querySelector("#welcome-text");
-
-    if (str === "signin") {
-      welcome.textContent = "Welcome Back";
-      img.classList.remove("right");
-      main.insertBefore(img, content);
-    } else {
-      welcome.textContent = "Let's Get Started";
-      img.classList.add("right");
-      main.insertBefore(content, img);
-    }
-  }
-  function validateForm() {
-    var result =
-      $("#PasswordInputSignup").val() === $("#RePasswordInputSignup").val();
-    if (result == false) {
-      alert("Password must match");
-    }
-    return result;
   }
 </script>
