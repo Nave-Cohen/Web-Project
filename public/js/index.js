@@ -53,8 +53,6 @@ $("#search-input").on("input", function () {
   });
 });
 
-$("#content-title").text(document.title + " Tasks");
-
 const $accordion = $("#accordion");
 if ($accordion.children().length === 0) {
   //desktop

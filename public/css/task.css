@@ -56,7 +56,9 @@ button:focus:not(:focus-visible),
 button:focus-visible {
   z-index: 3;
 }
-
+.accordion-button::after{
+  margin-left: 2%;
+}
 .card-text {
   max-height: 150px;
   margin: 5px 10px;
@@ -64,4 +66,19 @@ button:focus-visible {
 .footer {
   margin: 0 10px;
   padding-bottom: 10px;
+}
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.title {
+  order: 1;
+  margin-right: auto;
+}
+
+.start {
+  order: 2;
 }

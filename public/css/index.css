@@ -1,3 +1,4 @@
+
 main {
   position: fixed;
   overflow-y: auto;
@@ -5,11 +6,18 @@ main {
   background-image: url("../images/index-bg-opacity.png");
   background-size: cover;
   background-repeat: no-repeat;
+  transition: width 0.3s ease-in-out;
+  width: 100%; /* Default width */
 }
 
-#content-title {
-  margin-left: 10%;
+.image-title {
+  max-width: 450px;
+  max-height: 70px;
+  position: relative;
+  top: 10px; /* Adjust the vertical position */
+  left: 7% /* Adjust the horizontal position */
 }
+
 #task-placeholder {
   position: absolute;
   top: 50%;

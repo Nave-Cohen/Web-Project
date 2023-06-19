@@ -12,7 +12,7 @@
 
 .sidebar {
   position: fixed;
-  width: 17%;
+  min-width: 70px;
   height: 100%;
   background-color: var(--sidebar-bg);
   z-index: 2;
@@ -34,6 +34,18 @@
 .sidebar.close .item-text {
   display: none;
 }
+.sidebar.close .list-item{
+  flex-direction: column;
+}
+
+.sidebar.open .item-title{
+  display: none;
+}
+.sidebar.open .list-item:hover .icons,
+.sidebar.open .list-item:hover .item-title {
+  animation: none;
+}
+
 
 .sidebar.close #menu-item {
   padding: 0;
@@ -41,10 +53,7 @@
   height: 50px;
 }
 
-.sidebar.close #menu-icon {
-  margin: 0 auto;
-}
-
+.sidebar.close #menu-icon,
 .sidebar.close .icons {
   margin: 0 auto;
 }
@@ -75,7 +84,6 @@
 .icons {
   font-size: 22px;
   margin-left: 15px;
-  margin-right: 30px;
 }
 
 @keyframes shake {
@@ -93,16 +101,20 @@
 .list-item {
   display: flex;
   align-items: center;
-  padding: 15px 0;
+  padding-top: 17px;
   background-color: var(--sidebar-item-bg);
   color: var(--sidebar-item-color);
   cursor: pointer;
+  font-size: 14px;
+  gap: 2px 15px;
 }
+
 .list-item.active {
   background-color: #66419d;
 }
-.list-item:hover .icons{
-  background-color: var(--sidebar-item-bg-hover);
+
+.list-item:hover .icons,
+.list-item:hover .item-title {
   animation: shake 1s;
 }
 
@@ -131,6 +143,7 @@ input[type="search"]:focus {
   transform: translate3d(0, 0, 0);
   transform: translateY(-40%);
 }
+
 .sidebar.close #logout-item {
   top: 97%;
 }
@@ -142,6 +155,10 @@ input[type="search"]:focus {
 
 .form-control:focus {
   box-shadow: 0 0 0 1px rgba(109, 34, 248, 0.35);
+}
+
+.sidebar.close {
+  width: 3.5%;
 }
 
 @media only screen and (max-width: 640px) {
@@ -156,9 +173,11 @@ input[type="search"]:focus {
   .sidebar.on-search {
     width: 80%;
   }
+
   #logout-item {
     top: 93.5%;
   }
+
   .sidebar.close #logout-item {
     top: 96%;
   }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%- include('../partials/head.ejs',{"title":title}) %>
+    <%- include('../partials/head.ejs') %>
     <link rel="stylesheet" href="../../public/css/index.css" />
     <link rel="stylesheet" href="../../public/css/task.css" />
     <link rel="stylesheet" href="../../public/css/sidebar.css" />
@@ -11,10 +11,12 @@
   <body>
     <main>
       <%- include('../partials/sidebar.ejs')%>
-      <div id="content" class="content" style="height: 100%; width: auto">
-        <h4 id="content-title" class="display-4"></h4>
-        <div class="accordion" id="accordion"><%- tasks %></div>
-      </div>
+      <img
+        class="image-title"
+        src="../../public/images/<%= title.toLowerCase() %>-title.png"
+        alt="<%= title %> Tasks"
+      />
+      <div class="accordion" id="accordion"><%- tasks %></div>
       <%- include('../partials/addBtn.ejs') %>
     </main>
   </body>

@@ -34,6 +34,7 @@ $searchInput.on("focusout", function () {
 $menuIcon.on("click", function () {
   $sidebar.toggleClass("close");
   $menuIcon.toggleClass("fa-xmark fa-bars");
+  $sidebar.toggleClass("open");
 });
 
 $logoutItem.on("click", function () {
@@ -42,5 +43,6 @@ $logoutItem.on("click", function () {
 
 $listItems.on("click", function () {
   const url = $(this).find("medium").text();
+  console.log(url);
   window.location.href = "/tasks/" + url;
 });
