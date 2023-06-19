@@ -1,7 +1,7 @@
-const ejs = require('ejs');
-const path = require('path');
+const ejs = require("ejs");
+const path = require("path");
 // eslint-disable-next-line no-undef
-const ejsPath = path.join(__dirname, '..', 'views/partials/task.ejs');
+const ejsPath = path.join(__dirname, "..", "views/partials/task.ejs");
 
 class Task {
   constructor(task) {
@@ -11,7 +11,7 @@ class Task {
     this.start = task.start;
     this.createdDate = task.created;
     this.done = task.done;
-    // TODO: add task start time
+    this._start_ = task.start;
   }
 
   get start() {
@@ -33,8 +33,16 @@ class Task {
     const date = new Date(this.createdDate);
     const timeDiff = Math.floor((today - date) / 1000);
 
-    const units = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'];
-    const durations = [365.25 * 24 * 60 * 60, 30.44 * 24 * 60 * 60, 7 * 24 * 60 * 60, 24 * 60 * 60, 60 * 60, 60, 1];
+    const units = ["year", "month", "week", "day", "hour", "minute", "second"];
+    const durations = [
+      365.25 * 24 * 60 * 60,
+      30.44 * 24 * 60 * 60,
+      7 * 24 * 60 * 60,
+      24 * 60 * 60,
+      60 * 60,
+      60,
+      1,
+    ];
 
     for (let i = 0; i < units.length; i++) {
       const value = Math.floor(timeDiff / durations[i]);
@@ -44,15 +52,15 @@ class Task {
       }
     }
 
-    return 'Just now';
+    return "Just now";
   }
   convertToMysqlDateTime(dateStr) {
     const date = new Date(dateStr);
     const year = date.getFullYear().toString().slice(-2);
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
 
     return `${day}/${month}/${year} ${hours}:${minutes}`;
   }
@@ -63,7 +71,7 @@ class Task {
       return html;
     } catch (err) {
       console.error(err);
-      return '';
+      return "";
     }
   }
 }
@@ -80,7 +88,7 @@ class Tasks {
       })
     );
 
-    const accordionHtml = htmlArray.join('');
+    const accordionHtml = htmlArray.join("");
 
     const wrappedHtml = `${accordionHtml}`;
 
