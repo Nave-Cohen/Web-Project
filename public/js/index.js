@@ -19,3 +19,13 @@ setInterval(function () {
     placeholder = false;
   }
 }, 10);
+
+$(document).ready(function () {
+  let itemId = $.cookie("scroll");
+  if (itemId) {
+    let collapseItem = $("#collapse-" + itemId);
+    collapseItem.collapse("show");
+    scrollTo(collapseItem);
+    $.removeCookie("scroll");
+  }
+});
