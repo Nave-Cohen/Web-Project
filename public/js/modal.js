@@ -141,5 +141,6 @@ $("#sbmt-btn").click(function () {
     updateRequest(task);
   } else {
     addReqest(task);
+    $.cookie("badges", "true");
   }
 });

@@ -2,30 +2,38 @@ const { Router } = require("express"),
   dbService = require("../services/db.service"),
   router = Router();
 
-async function renderIndex(res, user, html, title) {
+router.use(async function (req, res, next) {
+  const id = req.session.user.id;
+  req.session.upcoming = await dbService.countUpcomingTasks(id);
+  req.session.today = await dbService.countTodayTasks(id);
+  next();
+});
+async function renderIndex(req, res, user, html, title) {
   res.render("../views/ejs/index.ejs", {
     tasks: html,
     title: title,
     user: user,
+    today: req.session.today,
+    upcoming: req.session.upcoming,
   });
 }
 
 router.get("/upcoming", async function (req, res) {
   var upcomingTasks = await dbService.getAllTasks(req.session.user.id);
   var html = await upcomingTasks.toHtml();
-  renderIndex(res, req.session.user, html, req.url.split("/").slice(-1));
+  renderIndex(req, res, req.session.user, html, req.url.split("/").slice(-1));
 });
 
 router.get("/today", async function (req, res) {
   var todayTasks = await dbService.getTodayTasks(req.session.user.id);
   var html = await todayTasks.toHtml();
-  renderIndex(res, req.session.user, html, req.url.split("/").slice(-1));
+  renderIndex(req, res, req.session.user, html, req.url.split("/").slice(-1));
 });
 
 router.get("/completed", async function (req, res) {
   var doneTasks = await dbService.getDoneTasks(req.session.user.id);
   var html = await doneTasks.toHtml();
-  renderIndex(res, req.session.user, html, req.url.split("/").slice(-1));
+  renderIndex(req, res, req.session.user, html, req.url.split("/").slice(-1));
 });
 
 router.post("/done", async function (req, res) {
@@ -77,12 +85,10 @@ router.get("/updateBadge", async function (req, res) {
 
 router.get("/closet", async function (req, res) {
   const uid = req.session.user.id;
-  const closetTask = await dbService.getFirstTask(uid);
+  const closetTask = await dbService.getCurrentTask(uid);
   if (closetTask) {
-    res.send({ task: closetTask });
-  } else {
-    res.sendStatus(500);
-  }
+    res.send(closetTask);
+  } else res.send(null);
 });
 
 function packTask(body) {
@@ -94,4 +100,5 @@ function packTask(body) {
     created: body.created,
   };
 }
+
 module.exports = router;

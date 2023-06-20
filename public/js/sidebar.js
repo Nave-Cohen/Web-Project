@@ -4,7 +4,7 @@ const $searchInput = $("#search-input");
 const $menuIcon = $("#menu-icon");
 const $listItems = $(".list-item:not(.user)");
 const $logoutItem = $("#logout-item");
-const title = document.title;
+const title = document.title.toLowerCase();
 
 getBadges();
 
@@ -53,16 +53,15 @@ $listItems.on("click", function () {
   window.location.href = "/tasks/" + url;
 });
 function getBadges() {
-  $.get(
-    "/tasks/updateBadge",
-    function (response) {
-      $("#today-badge").text(response.today);
-      $("#upcoming-badge").text(response.upcoming);
-    },
-    "json"
-  );
+  if ($.cookie("badges")) {
+    $.removeCookie("badges");
+    var todayBadge = parseInt($("#today-badge").text());
+    var upcomingBadge = parseInt($("#upcoming-badge").text());
+    $("#today-badge").text(todayBadge + 1);
+    $("#upcoming-badge").text(upcomingBadge + 1);
+  }
 }
-setInterval(getBadges, 2500);
+setInterval(getBadges, 1000);
 
 // eslint-disable-next-line no-unused-vars
 function search(items) {
