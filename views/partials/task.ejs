@@ -13,7 +13,10 @@
       aria-expanded="false"
       aria-controls="collapse-<%=task.id%>"
     >
-      <medium id="title"><%= task.title %></medium>
+      <div class="task-header">
+        <medium class="title"><%= task.title %></medium>
+        <medium class="start"><%= task.start %></medium>
+      </div>
     </button>
   </h2>
   <div

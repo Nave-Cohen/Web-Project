@@ -58,6 +58,7 @@ function getBadges() {
     function (response) {
       $("#today-badge").text(response.today);
       $("#upcoming-badge").text(response.upcoming);
+      $("#incompleted-badge").text(response.incompleted);
     },
     "json"
   );

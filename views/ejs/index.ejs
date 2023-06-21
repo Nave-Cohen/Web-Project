@@ -10,14 +10,23 @@
 
   <body>
     <main>
-      <%- include('../partials/sidebar.ejs',user)%>
+      <%- include('../partials/sidebar.ejs')%>
+      <img
+      class="image-title"
+      src="../../public/images/<%= title %>-title.png"
+      alt="<%= title %> Tasks"
+    />
       <div id="content" class="content" style="height: 100%; width: auto">
-        <h4 id="content-title" class="display-4"></h4>
         <div class="accordion" id="accordion"><%- tasks %></div>
       </div>
       <%- include("../partials/modal.ejs") %>
-      <i id="addBtn" class="fa-solid fa-plus" onclick="showModal()"></i>
-      <%- include("../partials/toast.ejs") %>
+      <div id="addBtnContainer" class="position-fixed rounded-circle bg-primary shadow" onclick="showModal()">
+        <div id="addBtn" class="addBtn">
+          <i id="addBtnIcon" class="fa-solid fa-plus fa-xl text-white"></i>
+          <div id="addBtnText" class="addBtnText">New Task</div>
+        </div>
+      </div>
+      </div>
     </main>
   </body>
   <script src="../../public/js/sidebar.js"></script>

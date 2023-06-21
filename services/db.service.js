@@ -52,6 +52,7 @@ async function login(usernameOrEmail, password) {
       return error;
     });
 }
+
 async function countTodayTasks(userid) {
   const today = new Date();
   const startDateTime = getNow();
@@ -73,6 +74,20 @@ async function countUpcomingTasks(userid) {
   return await pool
     .query(
       "SELECT COUNT(*) as count FROM tasks WHERE uid = ? AND done = 0 AND start >= NOW()",
+      [userid]
+    )
+    .then(([rows]) => {
+      return rows[0].count;
+    })
+    .catch((error) => {
+      return error;
+    });
+}
+
+async function countIncompletedTasks(userid) {
+  return await pool
+    .query(
+      "SELECT COUNT(*) as count FROM tasks WHERE uid = ? AND done = 0 AND start < NOW()",
       [userid]
     )
     .then(([rows]) => {
@@ -115,10 +130,24 @@ async function getAllTasks(userid) {
     });
 }
 
-async function getDoneTasks(userid) {
+async function getCompletedTasks(userid) {
   return await pool
     .query(
       "SELECT * FROM tasks WHERE uid = ? AND done = 1 ORDER BY start ASC",
+      [userid]
+    )
+    .then(([rows]) => {
+      return new Tasks(rows);
+    })
+    .catch((error) => {
+      return error;
+    });
+}
+
+async function getIncompletedTasks(userid) {
+  return await pool
+    .query(
+      "SELECT * FROM tasks WHERE uid = ? AND done = 0 AND start < NOW() ORDER BY start ASC",
       [userid]
     )
     .then(([rows]) => {
@@ -177,6 +206,20 @@ async function addTask(uid, task) {
   }
 }
 
+async function getIncompletedTasks(userid) {
+  return await pool
+    .query(
+      "SELECT * FROM tasks WHERE uid = ? AND done = 0 AND start < NOW() ORDER BY start ASC",
+      [userid]
+    )
+    .then(([rows]) => {
+      return new Tasks(rows);
+    })
+    .catch((error) => {
+      return error;
+    });
+}
+
 async function getFirstTask(userid) {
   const startDateTime = getNow();
   return await pool
@@ -196,7 +239,6 @@ async function getFirstTask(userid) {
     });
 }
 
-//TODO: add task
 module.exports = {
   register,
   login,
@@ -205,9 +247,13 @@ module.exports = {
   deleteTask,
   finishTask,
   getTodayTasks,
-  getDoneTasks,
+  getCompletedTasks,
+  getIncompletedTasks,
+  getCompletedTasks,
+  getIncompletedTasks,
   countTodayTasks,
   countUpcomingTasks,
+  countIncompletedTasks,
   updateTask,
   addTask,
   getFirstTask,

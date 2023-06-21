@@ -10,20 +10,26 @@ async function renderIndex(res, user, html, title) {
   });
 }
 
-router.get("/upcoming", async function (req, res) {
-  var upcomingTasks = await dbService.getAllTasks(req.session.user.id);
-  var html = await upcomingTasks.toHtml();
-  renderIndex(res, req.session.user, html, req.url.split("/").slice(-1));
-});
-
 router.get("/today", async function (req, res) {
   var todayTasks = await dbService.getTodayTasks(req.session.user.id);
   var html = await todayTasks.toHtml();
   renderIndex(res, req.session.user, html, req.url.split("/").slice(-1));
 });
 
+router.get("/upcoming", async function (req, res) {
+  var upcomingTasks = await dbService.getAllTasks(req.session.user.id);
+  var html = await upcomingTasks.toHtml();
+  renderIndex(res, req.session.user, html, req.url.split("/").slice(-1));
+});
+
+router.get("/incomplete", async function (req, res) {
+  var incompleteTasks = await dbService.getIncompletedTasks(req.session.user.id);
+  var html = await incompleteTasks.toHtml();
+  renderIndex(res, req.session.user, html, req.url.split("/").slice(-1));
+});
+
 router.get("/completed", async function (req, res) {
-  var doneTasks = await dbService.getDoneTasks(req.session.user.id);
+  var doneTasks = await dbService.getCompletedTasks(req.session.user.id);
   var html = await doneTasks.toHtml();
   renderIndex(res, req.session.user, html, req.url.split("/").slice(-1));
 });
@@ -70,9 +76,10 @@ router.post("/add", async function (req, res) {
 
 router.get("/updateBadge", async function (req, res) {
   const uid = req.session.user.id;
-  const upcomingNum = await dbService.countUpcomingTasks(uid);
   const todayNum = await dbService.countTodayTasks(uid);
-  res.send({ upcoming: upcomingNum, today: todayNum });
+  const upcomingNum = await dbService.countUpcomingTasks(uid);
+  const incompletedNum = await dbService.countIncompletedTasks(uid);
+  res.send({ upcoming: upcomingNum, today: todayNum , incompleted: incompletedNum});
 });
 
 router.get("/closet", async function (req, res) {
