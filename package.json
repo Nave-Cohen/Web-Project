@@ -6,14 +6,11 @@
   "author": "Nave-Cohen <nave.cohen@e.braude.ac.il>",
   "license": "MIT",
   "scripts": {
-    "start": "npm run build & npm run scss & node app.js",
+    "start": "npm run scss & node app.js",
     "scss": "node-sass --include-path scss views/scss/style.scss  -o public/css",
-    "dev": "npm run build & npm run scss & nodemon app.js",
+    "dev": "npm run scss & nodemon app.js",
     "lint": "npx eslint .",
-    "tests": "mocha --recursive --reporter spec --exit",
-    "build": "dotenv -- run-script-os",
-    "build:win32": "mysql -h %DB_HOST% -u %DB_USER% -p%DB_PASS% < %INIT_CWD%/configs/init.sql",
-    "build:linux": "export MYSQL_PWD=$DB_PASS && mysql -h $DB_HOST -u $DB_USER < $INIT_CWD/configs/init.sql"
+    "tests": "mocha --recursive --reporter spec --exit"
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
