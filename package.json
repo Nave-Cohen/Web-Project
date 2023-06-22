@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "npm run build & npm run scss & node app.js",
-    "scss": "node-sass --include-path scss public/css/style.scss public/css/style.css",
+    "scss": "node-sass --include-path scss views/scss/style.scss  -o public/css",
     "dev": "npm run build & npm run scss & nodemon app.js",
     "lint": "npx eslint .",
     "tests": "mocha --recursive --reporter spec --exit",
