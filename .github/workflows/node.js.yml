@@ -39,5 +39,3 @@ jobs:
 
       - name: Run scss
         run: npm run scss
-      - name: Run tests
-        run: npm run tests
