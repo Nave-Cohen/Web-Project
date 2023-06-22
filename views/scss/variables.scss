@@ -1,6 +1,6 @@
 // Default variable overrides
 $primary: rgb(112, 71, 186) !default;
-$hover: rgb(89, 53, 156) !default;
+$hover: #6842ad !default;
 $active:rgb(61, 30, 118) !default;
 
 //Sign in nav-tabs
@@ -26,10 +26,12 @@ $accordion-button-active-color: white;
 //List-group - Sidebar
 $list-group-bg:$primary;
 $list-group-active-bg:$active;
-$list-group-action-active-bg:$active;
-//List-group-action - Sidebar
 $list-group-hover-bg:$hover;
+
+//List-group-action - Sidebar
+$list-group-action-active-bg:$active;
 $list-group-action-hover-color:$hover;
+
 //List-group-color - Sidebar
 $list-group-action-hover-color:white;
 $list-group-active-color:white;
