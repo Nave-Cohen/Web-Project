@@ -1,21 +1,12 @@
 :root {
-  --sidebar-bg: #7952b3;
-  --sidebar-item-color: white;
-  --sidebar-item-bg: #7952b3;
-  --sidebar-item-bg-hover: #865fc0;
-  --sidebar-menu-bg: #563d7c;
-  --sidebar-menu-color: white;
-  --search-input-bg: white;
-  --search-input-color: black;
   --search-input-ph-color: rgba(0, 0, 0, 0.26);
 }
 
 .sidebar {
+  background-color: $primary;
   position: fixed;
   width: 20%;
   height: 100%;
-
-  background-color: var(--sidebar-bg);
   z-index: 2;
   transition: width 0.3s ease;
   transform: translate3d(0, 0, 0);
@@ -59,8 +50,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--sidebar-menu-bg);
-  color: var(--sidebar-menu-color);
+  background-color:$active;
+  color: white;
   height: 80px;
 }
 
@@ -84,25 +75,9 @@
   display: flex;
   align-items: center;
   padding: 15px 0;
-  background-color: var(--sidebar-item-bg);
-  color: var(--sidebar-item-color);
   cursor: pointer;
 }
-.list-item.active {
-  background-color: #66419d;
-}
-.list-item:hover {
-  background-color: var(--sidebar-item-bg-hover);
-}
 
-#search-item {
-  background-color: var(--sidebar-item-bg);
-}
-
-input[type="search"] {
-  background-color: var(--search-input-bg);
-  color: var(--search-input-color);
-}
 
 input[type="search"]::placeholder {
   color: var(--search-input-ph-color);
@@ -132,15 +107,13 @@ input[type="search"]:focus {
   box-shadow: 0 0 0 1px rgba(109, 34, 248, 0.35);
 }
 #user-icon {
-  color: var(--sidebar-item-bg);
+  color: $primary;
   background-color: white;
   border-radius: 100%;
   font-size: 17px;
   padding: 7px;
 }
-#user-icon:hover {
-  color: var(--sidebar-item-bg-hover);
-}
+
 @media only screen and (max-width: 640px) {
   .sidebar.close {
     width: 10%;
