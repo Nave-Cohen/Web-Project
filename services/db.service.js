@@ -16,6 +16,13 @@ class PoolSingleton {
 
 const pool = PoolSingleton.getInstance();
 
+function getNow() {
+  const today = new Date();
+  const tzOffset = today.getTimezoneOffset() * 60000;
+  const now = new Date(today - tzOffset);
+  return now.toISOString().slice(0, 16);
+}
+
 /* register users */
 async function register(username, email, password) {
   const insertQuery =
@@ -119,6 +126,10 @@ async function getDoneTasks(userid) {
       "SELECT * FROM tasks WHERE uid = ? AND done = 1 ORDER BY start ASC",
       [userid]
     )
+    .query(
+      "SELECT * FROM tasks WHERE uid = ? AND done = 1 ORDER BY start ASC",
+      [userid]
+    )
     .then(([rows]) => {
       return new Tasks(rows);
     })
@@ -129,6 +140,7 @@ async function getDoneTasks(userid) {
 
 async function deleteTask(taskid) {
   return await pool
+    .query("DELETE FROM tasks WHERE id = ?", [taskid])
     .query("DELETE FROM tasks WHERE id = ?", [taskid])
     .then(([rows]) => {
       return rows.affectedRows > 0;
@@ -141,6 +153,7 @@ async function deleteTask(taskid) {
 async function finishTask(taskid) {
   return await pool
     .query("UPDATE `tasks` SET `done` = 1 WHERE `id` = ?", [taskid])
+    .query("UPDATE `tasks` SET `done` = 1 WHERE `id` = ?", [taskid])
     .then(([rows]) => {
       return rows.affectedRows > 0;
     })
@@ -150,6 +163,10 @@ async function finishTask(taskid) {
 }
 async function updateTask(task) {
   return await pool
+    .query(
+      "UPDATE `tasks` SET title = ?, content = ? ,start = ? ,created = NOW()  WHERE `id` = ?",
+      [task.title, task.content, task.start, task.id]
+    )
     .query(
       "UPDATE `tasks` SET title = ?, content = ? ,start = ? ,created = NOW()  WHERE `id` = ?",
       [task.title, task.content, task.start, task.id]
@@ -173,13 +190,6 @@ async function addTask(uid, task) {
   } catch (error) {
     return null;
   }
-}
-
-function getNow() {
-  const today = new Date();
-  const tzOffset = today.getTimezoneOffset() * 60000;
-  const now = new Date(today - tzOffset);
-  return now.toISOString().slice(0, 16);
 }
 
 async function getCurrentTask(userid) {
