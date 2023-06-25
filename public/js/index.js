@@ -5,6 +5,10 @@ let placeholder = false;
 search($items); //Sidebar function.
 
 $("#content-title").text(document.title + " Tasks"); //Change top site label.
+$("#img-title").attr(
+  "src",
+  "../../public/images/" + document.title + "-tasks.png"
+);
 
 $(document).ready(function () {
   var $accordion = $(".accordion");
