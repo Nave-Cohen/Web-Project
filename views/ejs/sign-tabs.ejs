@@ -2,7 +2,11 @@
 <html lang="en">
   <head>
     <%- include('../partials/head.ejs',{"title":title}) %>
-    <link rel="stylesheet" href="../../public/css/sign-tabs.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../../public/css/sign-tabs.css"
+    />
   </head>
 
   <body>
@@ -12,8 +16,16 @@
           <h1 id="welcome-text" class="display-1">Welcome Back</h1>
         </div>
         <div class="child content">
-          <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation" onclick="updateUrl('signin')">
+          <ul
+            class="nav nav-tabs justify-content-center"
+            id="myTab"
+            role="tablist"
+          >
+            <li
+              class="nav-item"
+              role="presentation"
+              onclick="updateUrl('signin')"
+            >
               <a
                 class="nav-link <%= active === 'signin' ? 'active' : '' %>"
                 id="signin-tab"
@@ -25,7 +37,11 @@
                 >Signin</a
               >
             </li>
-            <li class="nav-item" role="presentation" onclick="updateUrl('signup')">
+            <li
+              class="nav-item"
+              role="presentation"
+              onclick="updateUrl('signup')"
+            >
               <a
                 class="nav-link <%= active === 'signup' ? 'active' : '' %>"
                 id="signup-tab"
@@ -65,8 +81,8 @@
 </html>
 <script src="../../public/js/sign-tabs.js"></script>
 <script>
-  var active = '<%= active %>';
-  if (active === 'signup') {
+  var active = "<%= active %>";
+  if (active === "signup") {
     replacePlaces(active);
   }
 </script>
