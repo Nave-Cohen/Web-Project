@@ -8,7 +8,7 @@
     <main>
       <img class="image-logo" src="../../public/images/logo.png" />
       <%- include('../partials/sidebar.ejs',user,today,upcoming)%>
-      <img id="" class="image-title" src="" alt="<%= title %> Tasks" />
+      <img id="img-title" class="image-title" src="" alt="<%= title %> Tasks" />
       <div class="accordion"><%- tasks %></div>
       <%- include("../partials/modal.ejs") %>
       <i id="addBtn" class="fa-solid fa-plus-circle" onclick="showModal()"></i>
