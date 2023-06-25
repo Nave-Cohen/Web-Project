@@ -12,8 +12,8 @@
     "lint": "npx eslint .",
     "tests": "mocha --recursive --reporter spec --exit",
     "build": "dotenv -- run-script-os",
-    "build:win32": "mysql -h %MYSQL_HOST% -u %MYSQL_USER% -p%MYSQL_PASSWORD	% < %INIT_CWD%/configs/init.sql",
-    "build:linux": "export MYSQL_PWD=$MYSQL_PASSWORD	 && mysql -h $MYSQL_HOST -u $MYSQL_USER < $INIT_CWD/configs/init.sql"
+    "build:win32": "mysql -h %DB_HOST% -u %DB_USER% -p%MYSQL_PASSWORD < %INIT_CWD%/configs/init.sql",
+    "build:linux": "export MYSQL_PWD=$MYSQL_PASSWORD && mysql -h $DB_HOST -u $DB_USER < $INIT_CWD/configs/init.sql"
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
