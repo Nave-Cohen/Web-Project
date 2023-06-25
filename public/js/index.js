@@ -10,11 +10,13 @@ $(document).ready(function () {
   var $accordion = $(".accordion");
   var $main = $("main");
 
-  if ($accordion.is(":empty")) {
-    $main.append(`<h1 id="task-placeholder">There are no tasks to show</h1>`);
-  } else {
-    $("#task-placeholder").remove();
-  }
+  setInterval(function () {
+    if ($accordion.is(":empty")) {
+      $main.append(`<h1 id="task-placeholder">There are no tasks to show</h1>`);
+    } else {
+      $("#task-placeholder").remove();
+    }
+  }, 10);
 });
 
 $(document).ready(function () {

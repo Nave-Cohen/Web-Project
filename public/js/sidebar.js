@@ -1,5 +1,4 @@
 const $sidebar = $(".sidebar");
-const $sidebarNext = $sidebar.next();
 const $searchInput = $("#search-input");
 const $menuIcon = $("#menu-icon");
 const $listItems = $(".list-item:not(.user)");
@@ -16,20 +15,6 @@ $(".item-text").each(function () {
     $(this).closest(".list-item").removeClass("active");
   }
 });
-
-// let previousWidth = $sidebar.outerWidth();
-// $sidebarNext.css("margin-left", previousWidth + "px");
-
-// if (!window.matchMedia("(max-width: 640px)").matches) {
-//   // On desktop
-//   setInterval(function () {
-//     const currentWidth = $sidebar.outerWidth();
-//     if (currentWidth !== previousWidth) {
-//       $sidebarNext.css("margin-left", currentWidth + "px");
-//     }
-//     previousWidth = currentWidth;
-//   }, 5);
-// }
 
 $searchInput.on("focus", function () {
   $sidebar.addClass("on-search");

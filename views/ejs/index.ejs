@@ -10,7 +10,7 @@
       <%- include('../partials/sidebar.ejs',user,today,upcoming)%>
       <img
         class="image-title"
-        src="../../public/images/<%= title %>-tasks.png"
+        src="../../public/images/<%= title.toLowerCase(); %>-tasks.png"
         alt="<%= title %> Tasks"
       />
       <div class="accordion"><%- tasks %></div>
