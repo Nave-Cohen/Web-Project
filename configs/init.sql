@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `bxetgnt3yjvsykeyetcl` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `bxetgnt3yjvsykeyetcl`;
+CREATE DATABASE  IF NOT EXISTS `todo_app` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `todo_app`;
 -- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
--- Host: localhost    Database: bxetgnt3yjvsykeyetcl
+-- Host: localhost    Database: todo_app
 -- ------------------------------------------------------
 -- Server version	8.0.31
 
@@ -76,7 +76,7 @@ INSERT INTO `users` VALUES (1,'navegi','navegi@email.com','123'),(2,'erik','erik
 UNLOCK TABLES;
 
 --
--- Dumping routines for database 'bxetgnt3yjvsykeyetcl'
+-- Dumping routines for database 'todo_app'
 --
 /*!50003 DROP PROCEDURE IF EXISTS `generate_random_rows` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -110,7 +110,7 @@ DELIMITER ;
 
 LOCK TABLES `tasks` WRITE;
 /*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
-CALL `bxetgnt3yjvsykeyetcl`.`generate_random_rows`(100);
+CALL `todo_app`.`generate_random_rows`(100);
 /*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
 
 UNLOCK TABLES;
