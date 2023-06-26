@@ -35,13 +35,11 @@ jobs:
 
       - name: Set up MySQL
         run: |
-          export MYSQL_PWD=${{ secrets.MYSQL_PASSWORD	 }}
           sudo /etc/init.d/mysql start
-      - name: build db
-        run: |
-          mysql -h ${{ secrets.MYSQL_HOST }} -u ${{ secrets.MYSQL_USER }} -p${{ secrets.MYSQL_PASSWORD	 }} < $GITHUB_WORKSPACE/configs/init.sql
 
       - name: Run scss
         run: npm run scss
+      - name: Run build-test-db
+        run: npm run build-test-db
       - name: Run tests
         run: npm run tests
