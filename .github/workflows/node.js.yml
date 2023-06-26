@@ -37,10 +37,10 @@ jobs:
       - name: Set up MySQL
         run: |
           sudo /etc/init.d/mysql start
+          sudo mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY ${{ secrets.MYSQL_PASSWORD }};"
+          sudo service mysql restart
       - name: Build DB
         run: |
-          ls $GITHUB_WORKSPACE
-          ls $GITHUB_WORKSPACE/configs
           mysql -h localhost -u root < $GITHUB_WORKSPACE/configs/init.sql
 
       - name: Run scss
