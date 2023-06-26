@@ -40,7 +40,7 @@ jobs:
           mysql -e 'CREATE DATABASE ${{env.MYSQL_DATABASE}};' -u ${{env.MYSQL_USER}} -p${{env.MYSQL_PASSWORD}}
       - name: Build DB
         run: |
-          mysql -h localhost -u ${{env.MYSQL_USER}} ${{env.MYSQL_DATABASE}} < $GITHUB_WORKSPACE/configs/init.sql
+          mysql -h localhost -u ${{env.MYSQL_USER}} -p${{env.MYSQL_PASSWORD}} ${{env.MYSQL_DATABASE}} < $GITHUB_WORKSPACE/configs/init.sql
 
       - name: Run scss
         run: npm run scss
