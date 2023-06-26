@@ -10,8 +10,7 @@
     "scss": "node-sass --include-path scss views/scss/style.scss  -o public/css",
     "dev": "npm run scss & nodemon app.js",
     "lint": "npx eslint .",
-    "tests": "mocha --recursive --reporter spec --exit",
-    "build-test-db":"export MYSQL_PWD=$MYSQL_PASSWORD && mysql -h $MYSQL_HOST -u $MYSQL_USER < $INIT_CWD/configs/init.sql"
+    "tests": "mocha --recursive --reporter spec --exit"
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
