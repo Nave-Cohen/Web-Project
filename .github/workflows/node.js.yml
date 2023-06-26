@@ -20,7 +20,6 @@ jobs:
       MYSQL_USER: ${{ secrets.MYSQL_USER }}
       MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
       JWTTOKEN: ${{ secrets.JWTTOKEN }}
-      MYSQL_PWD: ${{ secrets.MYSQL_PASSWORD }}
 
     steps:
       - name: Checkout code
@@ -38,9 +37,6 @@ jobs:
         run: |
           sudo /etc/init.d/mysql start
           mysql -e 'CREATE DATABASE ${{env.MYSQL_DATABASE}};' -u ${{env.MYSQL_USER}} -p${{env.MYSQL_PASSWORD}}
-      - name: Build DB
-        run: |
-          mysql -h localhost -u ${{env.MYSQL_USER}} -p${{env.MYSQL_PASSWORD}} ${{env.MYSQL_DATABASE}} < $GITHUB_WORKSPACE/configs/init.sql
 
       - name: Run scss
         run: npm run scss
