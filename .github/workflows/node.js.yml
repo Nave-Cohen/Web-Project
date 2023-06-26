@@ -15,10 +15,10 @@ jobs:
   build-node:
     runs-on: ubuntu-latest
     env:
-      MYSQL_HOST: 127.0.0.1
-      MYSQL_PASSWORD: root
-      MYSQL_USER: root
-      MYSQL_DATABASE: bxetgnt3yjvsykeyetcl
+      MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+      MYSQL_USER: ${{ secrets.MYSQL_USER }}
+      MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
       JWTTOKEN: ${{ secrets.JWTTOKEN }}
 
     steps:
@@ -38,8 +38,8 @@ jobs:
           sudo /etc/init.d/mysql start
       - name: build db
         run: |
-          export MYSQL_PWD=root
-          mysql -h 127.0.0.1 -u root < $GITHUB_WORKSPACE/configs/init.sql
+          export MYSQL_PWD=${{ env.MYSQL_PASSWORD }}
+          mysql -h ${{ env.MYSQL_HOST }} -u ${{ env.MYSQL_USER }} < $GITHUB_WORKSPACE/configs/init.sql
       - name: Run scss
         run: npm run scss
       - name: Run tests
