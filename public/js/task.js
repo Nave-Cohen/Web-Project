@@ -10,7 +10,7 @@ function doneClicked(taskid) {
     .then((response) => {
       if (response.ok) {
         $(`.accordion-item-${taskid}`).remove();
-        $.cookie("badges", "true");
+        $.cookie("badges", "false");
       } else {
         alert("There was an error when trying to finish a task");
       }
@@ -31,7 +31,7 @@ function deleteClicked(taskid) {
     .then((response) => {
       if (response.ok) {
         $(`.accordion-item-${taskid}`).remove();
-        $.cookie("badges", "true");
+        $.cookie("badges", "false");
       } else {
         alert("There was an error when trying to delete");
       }
