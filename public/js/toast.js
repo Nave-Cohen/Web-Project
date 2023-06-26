@@ -29,7 +29,7 @@ function getClosetTask() {
   $.get(
     "/tasks/closet",
     function (response) {
-      if (response) {
+      if (response.length > 0) {
         toastTask(response);
       }
     },
