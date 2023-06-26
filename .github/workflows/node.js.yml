@@ -39,7 +39,7 @@ jobs:
           sudo /etc/init.d/mysql start
       - name: build db
         run: |
-          mysql -h ${{ secrets.MYSQL_HOST }} -u ${{ secrets.MYSQL_USER }} < $GITHUB_WORKSPACE/configs/init.sql
+          mysql -h ${{ secrets.MYSQL_HOST }} -u ${{ secrets.MYSQL_USER }} -p${{ secrets.MYSQL_PASSWORD	 }} < $GITHUB_WORKSPACE/configs/init.sql
 
       - name: Run scss
         run: npm run scss
