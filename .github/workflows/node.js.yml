@@ -15,10 +15,10 @@ jobs:
   build-node:
     runs-on: ubuntu-latest
     env:
-      MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
-      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-      MYSQL_USER: ${{ secrets.MYSQL_USER }}
-      MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+      MYSQL_HOST: 127.0.0.1
+      MYSQL_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_DATABASE: bxetgnt3yjvsykeyetcl
       JWTTOKEN: ${{ secrets.JWTTOKEN }}
 
     steps:
