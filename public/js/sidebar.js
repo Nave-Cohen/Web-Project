@@ -44,7 +44,6 @@ function getBadges() {
 
   let todayBadge = parseInt(todayBadgeElement.text(), 10);
   let upcomingBadge = parseInt(upcomingBadgeElement.text(), 10);
-
   if ($.cookie("badges")) {
     if (cookie) {
       todayBadge++;
@@ -56,7 +55,12 @@ function getBadges() {
     todayBadgeElement.text(todayBadge);
     upcomingBadgeElement.text(upcomingBadge);
     $.removeCookie("badges");
+
   }
+  todayBadgeElement.text(todayBadge);
+  upcomingBadgeElement.text(upcomingBadge);
+
+  $.removeCookie("badges");
 }
 
 setInterval(getBadges, 500);
