@@ -5,12 +5,6 @@ var $accordion = $(".accordion");
 // eslint-disable-next-line no-undef
 search($items); //Sidebar function.
 
-$("#content-title").text(document.title + " Tasks"); //Change top site label.
-$("#img-title").attr(
-  "src",
-  "../../public/images/" + document.title.toLowerCase() + "-tasks.png"
-);
-
 $(document).ready(function () {
   setInterval(function () {
     if ($accordion.children().length === 0 && placeholder == false) {

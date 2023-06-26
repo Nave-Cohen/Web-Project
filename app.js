@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/public", express.static(`${__dirname}/public`));
 
 app.get("/", jwt, async (req, res) => {
-  res.redirect("tasks/today");
+  res.redirect("tasks/Today");
 });
 app.use("/users", users);
 
