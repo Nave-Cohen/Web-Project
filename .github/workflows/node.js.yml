@@ -39,11 +39,11 @@ jobs:
           sudo /etc/init.d/mysql start
       - name: Build DB
         run: |
+          ls $GITHUB_WORKSPACE
+          ls $GITHUB_WORKSPACE/configs
           mysql -h localhost -u root < $GITHUB_WORKSPACE/configs/init.sql
 
       - name: Run scss
         run: npm run scss
-      - name: Run build-test-db
-        run: npm run build-test-db
       - name: Run tests
         run: npm run tests
