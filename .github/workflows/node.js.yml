@@ -36,6 +36,8 @@ jobs:
       - name: Set up MySQL
         run: |
           sudo /etc/init.d/mysql start
+      - name: build db
+        run: sudo export MYSQL_PWD=$DB_PASS && mysql -h $DB_HOST -u $DB_USER < $INIT_CWD/configs/init.sql
 
       - name: Run scss
         run: npm run scss
