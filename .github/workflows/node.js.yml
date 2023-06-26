@@ -39,7 +39,7 @@ jobs:
       - name: build db
         run: |
           export MYSQL_PWD=$MYSQL_PASSWORD
-          mysql -h $MYSQL_HOST -u $MYSQL_USER < $GITHUB_WORKSPACE/configs/init.sql
+          mysql -h localhost -u $MYSQL_USER < $GITHUB_WORKSPACE/configs/init.sql
 
       - name: Run scss
         run: npm run scss
