@@ -37,7 +37,9 @@ jobs:
         run: |
           sudo /etc/init.d/mysql start
       - name: build db
-        run: sudo export MYSQL_PWD=$DB_PASS && mysql -h $DB_HOST -u $DB_USER < $INIT_CWD/configs/init.sql
+        run: |
+          export MYSQL_PWD=$MYSQL_PASSWORD
+          mysql -h $MYSQL_HOST -u $MYSQL_USER < $INIT_CWD/configs/init.sql
 
       - name: Run scss
         run: npm run scss
