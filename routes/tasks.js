@@ -94,7 +94,9 @@ router.get("/closet", async function (req, res) {
   const closetTask = await dbService.getCurrentTask(uid);
   if (closetTask) {
     res.send(closetTask);
-  } else res.send(null);
+  } else {
+    res.sendStatus(204);
+  }
 });
 
 function packTask(body) {

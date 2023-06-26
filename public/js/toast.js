@@ -26,11 +26,13 @@ function createToast(id, title) {
 }
 
 function getClosetTask() {
-  $.get("/tasks/closet").done(function (response) {
-    if (response) {
+  $.get(
+    "/tasks/closet",
+    function (response) {
       toastTask(response);
-    }
-  });
+    },
+    "json"
+  );
 }
 
 function toastTask(response) {
