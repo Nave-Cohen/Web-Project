@@ -24,10 +24,16 @@ function createToast(id, title) {
   >${title}</div>
 </div>`;
 }
-
+function getNow() {
+  const now = new Date();
+  const tzOffset = now.getTimezoneOffset() * 60000;
+  const minDateTimeObj = new Date(now - tzOffset);
+  return { time: minDateTimeObj.toISOString().slice(0, 16) };
+}
 function getClosetTask() {
   $.post(
     "/tasks/now",
+    getNow(),
     function (response) {
       if (response.length > 0) {
         toastTask(response);

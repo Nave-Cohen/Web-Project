@@ -16,13 +16,6 @@ class PoolSingleton {
 
 const pool = PoolSingleton.getInstance();
 
-function getNow() {
-  const today = new Date();
-  const tzOffset = today.getTimezoneOffset() * 60000;
-  const now = new Date(today - tzOffset);
-  return now.toISOString().slice(0, 16);
-}
-
 function getTodayDate() {
   const today = new Date();
   const year = today.getFullYear();
@@ -213,8 +206,7 @@ async function editProfile(task) {
     });
 }
 
-async function getCurrentTask(userid) {
-  const startDateTime = getNow();
+async function getCurrentTask(userid, startDateTime) {
   return await pool
     .query(
       "SELECT id,title FROM tasks WHERE uid = ? AND start = ? AND done = 0",

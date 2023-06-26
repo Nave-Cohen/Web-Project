@@ -91,7 +91,8 @@ router.get("/updateBadge", async function (req, res) {
 
 router.post("/now", async function (req, res) {
   const uid = req.session.user.id;
-  const closetTask = await dbService.getCurrentTask(uid);
+  const startTime = req.body.time;
+  const closetTask = await dbService.getCurrentTask(uid, startTime);
   res.send(closetTask);
 });
 
