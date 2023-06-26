@@ -6,7 +6,6 @@ main {
   background-size: cover;
   background-repeat: no-repeat;
 }
-
 #addBtn {
   position: fixed;
   top: 90%;
@@ -62,7 +61,10 @@ main {
   background: #555;
 }
 #task-placeholder {
-  margin: 30px 0 0 300px;
+  position: absolute;
+  top:50%;
+  left:40%;
+  color: #00000040;
 }
 @keyframes title-enter {
   from {

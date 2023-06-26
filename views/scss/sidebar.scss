@@ -19,9 +19,7 @@
 .sidebar.close ~ .image-title {
   margin-left: 0;
 }
-.sidebar.close ~ #task-placeholder {
-  margin-left: 150px;
-}
+
 .sidebar.on-search {
   width: 30%;
 }
@@ -163,8 +161,5 @@ input[type="search"]:focus {
   .sidebar ~ .image-title {
     margin-left: 0;
   }
-  .sidebar.close ~ #task-placeholder {
-    font-size: 24px;
-    margin-left: 50px;
-  }
+
 }
