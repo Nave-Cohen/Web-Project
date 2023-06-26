@@ -5,7 +5,7 @@
 .sidebar {
   background-color: $primary;
   position: fixed;
-  max-width: 20%;
+  max-width: 80%;
   height: 100%;
   z-index: 2;
   transition: width 0.3s ease;
@@ -19,9 +19,19 @@
 .sidebar.close ~ .image-title {
   margin-left: 0;
 }
-
+.sidebar.close ~ #task-placeholder {
+  margin-left: 10%;
+}
 .sidebar.on-search {
+  transition: width 1s ease;
   width: 30%;
+}
+.sidebar.on-search ~ .accordion,
+.sidebar.on-search ~ .image-title{
+  margin-left: 30%;
+}
+.sidebar.on-search ~ #task-placeholder{
+  margin-left: 40%;
 }
 
 .sidebar.close .badge,
@@ -29,6 +39,9 @@
 .sidebar.close #search-item,
 .sidebar.close #logout-text{
   display: none;
+}
+#logout-text{
+  font-size: 17px;
 }
 #logout-text{
   font-size: 17px;
@@ -96,12 +109,19 @@ input[type="search"]:focus {
   display: flex;
   align-items: center;
   gap: 15px;
+}
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 15px;
   position: absolute;
   top: 95%;
   cursor: pointer;
   transform: translate3d(0, 0, 0);
   font-size: 26px;
+  font-size: 26px;
   color: white;
+  padding: 0 15px;
   padding: 0 15px;
 }
 
@@ -135,9 +155,32 @@ input[type="search"]:focus {
     transform: translateX(5px) rotate(-5deg);
   }
 }
+.sidebar.close .list-item,
+.sidebar.close .user-item{
+  flex-direction: column;
+  font-size: 12px;
+}
+
+.sidebar.close .list-item:hover .icons,
+.sidebar.close .list-item:hover .item-text {
+  animation: shake 1s;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0) rotate(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px) rotate(5deg);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px) rotate(-5deg);
+  }
+}
 
 @media only screen and (max-width: 640px) {
   .sidebar.close {
+    width: 12%;
     width: 12%;
   }
   .sidebar {
@@ -150,16 +193,33 @@ input[type="search"]:focus {
   }
   .sidebar.close .item-text{
     display: none;
+    background-color: $primary;
+    max-width: 85%;
+    height: 100%;
+    z-index: 10;
+    transition: width 0.3s ease;
+    transform: translate3d(0, 0, 0);
   }
+
   .sidebar.on-search {
     width: 85%;
   }
+
   .sidebar.close .logout-btn {
     top: 95%;
   }
-  .sidebar ~ .accordion,
-  .sidebar ~ .image-title {
-    margin-left: 0;
+
+  #task-placeholder{
+    font-size: 22px;
   }
 
+  .sidebar.close ~ .image-title,
+  .sidebar.on-search ~ .image-title{
+    margin-left: 10%;
+  }
+
+  .sidebar.close ~ #task-placeholder,
+  .sidebar.on-search ~ #task-placeholder{
+    margin-left: 15%;
+  }
 }

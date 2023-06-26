@@ -6,7 +6,16 @@
     </li>
     <li class="user-item" onclick="showUserModal('<%= user.id %>')">
       <i id="user-icon" class="icons fa-solid"><%= user.letter%></i>
-      <medium id="user-text" style="color: white"><%= user.name%></medium>
+      <medium
+        id="user-text"
+        style="
+          color: white;
+          max-width: 60px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        "
+        ><%= user.name %></medium
+      >
     </li>
     <li id="search-item" class="list-group-item">
       <input

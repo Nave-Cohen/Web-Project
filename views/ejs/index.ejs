@@ -8,16 +8,14 @@
     <main>
       <img class="image-logo" src="../../public/images/logo.png" />
       <%- include('../partials/sidebar.ejs',user,today,upcoming)%>
-      <img id="img-title" class="image-title" src="" alt="<%= title %> Tasks" />
+      <h1 id="img-title" class="image-title"><%= title %> Tasks</h1>
       <div class="accordion"><%- tasks %></div>
       <%- include("../partials/modal.ejs") %>
       <i id="addBtn" class="fa-solid fa-plus-circle" onclick="showModal()"></i>
       <div
         class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3"
       ></div>
-      <div id="userModalContent">
-        <%- include("../partials/user-modal.ejs") %>
-      </div>
+      <%- include("../partials/user-modal.ejs") %>
     </main>
 
     <script src="../../public/js/sidebar.js"></script>

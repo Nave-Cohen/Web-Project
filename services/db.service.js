@@ -191,19 +191,23 @@ async function addTask(uid, task) {
     return null;
   }
 }
-
 async function editProfile(task) {
-  return await pool
-    .query(
-      "UPDATE `users` SET username = ?, email = ? ,password = ? WHERE `id` = ?",
-      [task.username, task.email, task.password, task.id]
-    )
-    .then(([rows]) => {
-      return rows.affectedRows > 0;
-    })
-    .catch((error) => {
-      throw Error(error);
-    });
+  let query;
+  let params;
+  if (task.password) {
+    query =
+      "UPDATE `users` SET username = ?, email = ?, password = ? WHERE `id` = ?";
+    params = [task.username, task.email, task.password, task.id];
+  } else {
+    query = "UPDATE `users` SET username = ?, email = ? WHERE `id` = ?";
+    params = [task.username, task.email, task.id];
+  }
+  try {
+    const [rows] = await pool.query(query, params);
+    return rows.affectedRows > 0;
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 async function getCurrentTask(userid, startDateTime) {
