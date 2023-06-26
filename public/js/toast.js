@@ -29,7 +29,9 @@ function getClosetTask() {
   $.get(
     "/tasks/closet",
     function (response) {
-      toastTask(response);
+      if (response) {
+        toastTask(response);
+      }
     },
     "json"
   );
