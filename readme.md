@@ -4,7 +4,7 @@
   </a>
 </div>
 
-##Deploy localy:
+## Deploy localy:
 
 ##### clone & Install dependencies
 
