@@ -10,7 +10,10 @@
     "scss": "node-sass --include-path scss views/scss/style.scss  -o public/css",
     "dev": "npm run scss & nodemon app.js",
     "lint": "npx eslint .",
-    "test": "mocha --recursive --reporter spec --exit"
+    "test": "mocha --recursive --reporter spec --exit",
+    "build-db": "dotenv -- run-script-os",
+    "build-db:win32": "mysql -h %MYSQL_HOST% -u %MYSQL_USER% -p%MYSQL_PASSWORD% < %INIT_CWD%/configs/init.sql",
+    "build-db:linux": "export MYSQL_PWD=$MYSQL_PASSWORD && mysql -h $MYSQL_HOST -u $MYSQL_USER < $INIT_CWD/configs/init.sql"
   },
   "dependencies": {
     "bootstrap": "^5.2.3",

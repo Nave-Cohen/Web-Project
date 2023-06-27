@@ -6,7 +6,7 @@
 
 ## Deploy localy:
 
-##### clone & Install dependencies
+#### clone & Install dependencies
 
 ```sh
 git clone https://github.com/Nave-Cohen/Web-Project.git
@@ -14,19 +14,29 @@ cd Web-Project
 npm install
 ```
 
-#### \*\* First run - important \*\*
+### \*\* First run - important (by order) \*\*
 
-- edit credintals on .env.template (located in root folder)
-  - do not change MYSQL_DATABASE=todo_app
-- rename .env.template -> .env
+1. #### enviorment variables
 
-##### Run
+   - edit credintals on .env.template (located in root folder)
+   - do not change MYSQL_DATABASE=todo_app
+   - rename .env.template -> .env
+
+1. #### build db
+
+```sh
+npm run build-db
+```
+
+#### Run
 
 ```sh
 npm start
+or to start nodemon
+npm run dev
 ```
 
-##### Tests
+#### Tests
 
 ```sh
 npm test
@@ -65,7 +75,7 @@ npm test
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com
-[ejs.com]: https://img.shields.io/badge/Ejs-000000?style=for-the-badge&logo=https://raw.githubusercontent.com/Nave-Cohen/Web-Project/main/public/images/ejs.png&logoColor=white&color=red
+[ejs.com]: https://img.shields.io/badge/Ejs-000000?style=for-the-badge&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABIAAAAKCAQAAAATQsYqAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm%2B48GgAAANRJREFUGBkFwTFLFAAAgNHvKoNAAqeDpggnodEplFvbXINAXBxDKIdoqDiI%2FoSiNLgKRuNBujoIbRKXY0jFgYNQ1Ou9JMlNT72VgbGpPXfktjO8SXLLunMcyAhbZl7Ie5yay5wNX8FnKzLCMzPbVvx1bUmZ4p%2BPHkky8M6FD4ameC4FJu5LkiTZxbEbUsZm%2BG3HoiTJGq48kJQseO0X%2FngpydAlNj00cWI5Se565YcDSY7wycCpiUMXSZLMG0k28dM9%2BeLQvu9JkiRZdIUnklXnvnn8H%2Fnr%2BNt30SffAAAAAElFTkSuQmCC&logoColor=white&color=red
 [ejs-url]: https://ejs.com
 [clever-cloud.com]: https://img.shields.io/badge/clever_cloud-000000?style=for-the-badge&logoColor=white&color=blue
 [clever-cloud-url]: https://www.clever-cloud.com/deploy-cloud-managed-mysql
