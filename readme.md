@@ -65,7 +65,7 @@ npm test
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com
-[ejs.com]: https://img.shields.io/badge/Ejs-000000?style=for-the-badge&logo=https://raw.githubusercontent.com/Nave-Cohen/Web-Project/main/public/images/ejs.svg&logoColor=white&color=red
+[ejs.com]: https://img.shields.io/badge/Ejs-000000?style=for-the-badge&logo=https://raw.githubusercontent.com/Nave-Cohen/Web-Project/main/public/images/ejs.png&logoColor=white&color=red
 [ejs-url]: https://ejs.com
 [clever-cloud.com]: https://img.shields.io/badge/clever_cloud-000000?style=for-the-badge&logoColor=white&color=blue
 [clever-cloud-url]: https://www.clever-cloud.com/deploy-cloud-managed-mysql
