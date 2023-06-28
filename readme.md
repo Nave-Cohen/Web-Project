@@ -6,7 +6,7 @@
 
 ## Deploy localy:
 
-#### clone & Install dependencies
+### clone & Install dependencies
 
 ```sh
 git clone https://github.com/Nave-Cohen/Web-Project.git
@@ -14,21 +14,20 @@ cd Web-Project
 npm install
 ```
 
-### \*\* First run - important (by order) \*\*
+### :warning: First run - important :warning:
 
-1. #### enviorment variables
+1. ##### enviorment variables
 
-   - edit credintals on .env.template (located in root folder)
-   - do not change MYSQL_DATABASE=todo_app
-   - rename .env.template -> .env
+   - edit credintals on **_.env.template_** (located in root folder)
+   - rename .env.template to **_.env_**
 
-1. #### build db
+1. ##### build db
 
 ```sh
 npm run build-db
 ```
 
-#### Run
+### Run
 
 ```sh
 npm start
@@ -36,13 +35,13 @@ or to start nodemon
 npm run dev
 ```
 
-#### Tests
+### Tests
 
 ```sh
 npm test
 ```
 
-<h2 style="text-align: center"> Build with</h2>
+<h2 style="text-align: center"> Build with :hammer:</h2>
 
 [![Express][Express.js]][Express-url]
 [![Scss][sass.com]][sass-url]
@@ -51,12 +50,12 @@ npm test
 [![ejs][ejs.com]][ejs-url]
 [![mysql][mysql.com]][mysql-url]
 
-<h2 style="text-align: center">Deploy with</h2>
+<h2 style="text-align: center">Deploy with :rocket:</h2>
 
 [![render][render.com]][render-url]
 [![clever-cloud][clever-cloud.com]][clever-cloud-url]
 
-<h2 style="text-align: center">Test with</h2>
+<h2 style="text-align: center">Test with :mag:</h2>
 
 [![Mocha][mocha.js]][mocha-url]
 [![chai][chai.js]][chai-url]
