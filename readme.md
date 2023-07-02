@@ -25,7 +25,6 @@ npm install
 
 ```sh
 npm run build-db
-$ Enter password: your-DB-password
 ```
 
 ### Run
