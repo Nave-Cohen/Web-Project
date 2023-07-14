@@ -1,5 +1,7 @@
 // Bootstrap modal for adding/editing a new task
 
+// Bootstrap modal for adding/editing a new task
+
 let id;
 const $title = $("#task-title");
 const $content = $("#task-content");
@@ -10,6 +12,7 @@ const $modal = $("#Modal");
 let minDateTime;
 
 // Update task with new input
+// Update task with new input
 function updateTask(task) {
   const $task = $(`.accordion-item-${task.id}`);
   $task.find("#title").text(task.title);
@@ -19,25 +22,35 @@ function updateTask(task) {
 }
 
 // Add a new task
+// Place task immediately in right place (sorted by date and time)
 function addTask(task, response) {
   const currentHref = location.href.toLowerCase();
-  if (!currentHref.includes("completed")) {
-    const taskDate = new Date(task.start);
+  const taskDate = new Date(task.start);
+
+  if (
+    currentHref.includes("upcoming") ||
+    (currentHref.includes("today") &&
+      taskDate.toDateString() === new Date().toDateString())
+  ) {
     const accordionItems = document.querySelectorAll(
       "[class*='accordion-item-']"
     );
     const accordion = $(".accordion");
     let inserted = false;
 
-    for (const item of accordionItems) {
-      // Place task in right place (sorted by date)
-      const compareDate = new Date($("#start", item).text().slice(7));
-      if (taskDate < compareDate) {
+    accordionItems.forEach((item) => {
+      // Compare added task date and time with other tasks on page
+      const startDateElement = item.querySelector("#start");
+      const startDateText = startDateElement.textContent.split(" - ")[1].trim();
+      const [day, month, year, time] = startDateText.split(/[/ ]/);
+      const [hours, minutes] = time.split(":");
+      const compareDate = new Date("20" + year, month - 1, day, hours, minutes);
+      if (taskDate.getTime() < compareDate.getTime()) {
         $(item).before(response);
         inserted = true;
-        break;
+        return false;
       }
-    }
+    });
 
     if (!inserted) {
       accordion.append(response);
@@ -45,6 +58,7 @@ function addTask(task, response) {
   }
 }
 
+// Update the task by sending post request
 // Update the task by sending post request
 function updateRequest(task) {
   $.post(
@@ -61,6 +75,7 @@ function updateRequest(task) {
 }
 
 // Add new task by sending post request
+// Add new task by sending post request
 function addReqest(task) {
   $.post(
     "/tasks/add",
@@ -76,6 +91,7 @@ function addReqest(task) {
 }
 
 // Get the minimum date and time (from current date and time) for the datetime picker
+// Get the minimum date and time (from current date and time) for the datetime picker
 function getMinDate() {
   const now = new Date();
   const tzOffset = now.getTimezoneOffset() * 60000;
@@ -89,6 +105,7 @@ function setStart() {
   $datetimepicker.val(minDateTime);
 }
 
+// Validate the modal input fields
 // Validate the modal input fields
 function validateModal() {
   const selectedDateTime = new Date($datetimepicker.val());
@@ -111,6 +128,7 @@ function validateModal() {
 }
 
 // Pack the task data into a JSON object
+// Pack the task data into a JSON object
 function packTask() {
   return {
     id,
@@ -120,6 +138,8 @@ function packTask() {
     created: $created.text(),
   };
 }
+
+// Show modal with task data
 
 // Show modal with task data
 function showModal(_id = -1, title = "", content = "", created = "") {
@@ -139,10 +159,12 @@ function showModal(_id = -1, title = "", content = "", created = "") {
 }
 
 // Hide modal when close button is clicked
+// Hide modal when close button is clicked
 $("#close-modal-btn").click(function () {
   $modal.hide();
 });
 
+// Update or add when the submit button is clicked
 // Update or add when the submit button is clicked
 $("#sbmt-btn").click(function () {
   if (!validateModal()) {
@@ -154,6 +176,6 @@ $("#sbmt-btn").click(function () {
     updateRequest(task);
   } else {
     addReqest(task);
-    $.cookie("badges", "true");
+    $.cookie("badges", "true|" + task.start);
   }
 });

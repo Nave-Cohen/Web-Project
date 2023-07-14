@@ -46,13 +46,14 @@ router.post("/signup", async function (req, res) {
     req.body.email,
     req.body.password
   );
-  if (user) {
-    req.session.user = user;
-    user.name = user.username;
-    user.letter = user.username.charAt(0);
-    res.sendStatus(200);
-  } else {
+  if (!user || user.errno == 1062) {
+    // Email or Username is taken
     res.sendStatus(500);
+  } else {
+    req.session.user = user;
+    user.name = req.body.username;
+    user.letter = user.name.charAt(0);
+    res.sendStatus(200);
   }
 });
 

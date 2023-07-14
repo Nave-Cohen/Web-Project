@@ -3,6 +3,7 @@
   data-id="<%= task.id  %>"
   data-title="<%= task.title %>"
   data-date="<%= task.createdDate %>"
+  date-start="<%= task.start%>"
 >
   <h2 class="accordion-header" id="heading-<%=task.id%>">
     <button
@@ -47,7 +48,7 @@
               <li>
                 <button
                   class="dropdown-item"
-                  onclick="deleteClicked('<%= task.id %>')"
+                  onclick="deleteClicked('<%- task.id %>','<%- task.start %>')"
                 >
                   <i class="fa-sharp fa-solid fa-trash"></i>&nbsp;&nbsp; Delete
                 </button>
@@ -64,7 +65,7 @@
               <li>
                 <button
                   class="dropdown-item"
-                  onclick="doneClicked('<%= task.id %>')"
+                  onclick="doneClicked('<%- task.id %>','<%- task.start %>')"
                 >
                   <i class="fa-solid fa-check"></i>&nbsp;&nbsp; Done
                 </button>
@@ -72,7 +73,7 @@
               <li>
                 <button
                   class="dropdown-item"
-                  onclick="deleteClicked('<%= task.id %>')"
+                  onclick="deleteClicked('<%- task.id %>','<%- task.start %>')"
                 >
                   <i class="fa-sharp fa-solid fa-trash"></i>&nbsp;&nbsp; Delete
                 </button>

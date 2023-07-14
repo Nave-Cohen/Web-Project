@@ -47,22 +47,47 @@ $listItems.on("click", function () {
 
 // Update tasks count for today and upcoming tasks and place it in propper badge
 function getBadges() {
-  const cookie = $.cookie("badges") === "true";
+  const cookieValue = $.cookie("badges");
+  const cookieArray = cookieValue ? cookieValue.split("|") : [];
+  if (cookieArray.length < 1) {
+    return;
+  }
+  const cookie = cookieArray[0];
+  const taskDate = new Date(cookieArray[1]);
+
   const todayBadgeElement = $("#today-badge");
   const upcomingBadgeElement = $("#upcoming-badge");
 
   let todayBadge = parseInt(todayBadgeElement.text(), 10);
   let upcomingBadge = parseInt(upcomingBadgeElement.text(), 10);
-  if ($.cookie("badges")) {
-    if (cookie) {
+  console.log(
+    taskDate,
+    taskDate.getDate() === new Date().getDate(),
+    taskDate.getDate(),
+    new Date().getDate()
+  );
+  if (cookie === "true") {
+    if (taskDate.getDate() === new Date().getDate()) {
       todayBadge++;
       upcomingBadge++;
+      todayBadgeElement.text(todayBadge);
+      upcomingBadgeElement.text(upcomingBadge);
     } else {
+      upcomingBadge++;
+      upcomingBadgeElement.text(upcomingBadge);
+    }
+    $.removeCookie("badges");
+  }
+  if (cookie === "false") {
+    if (taskDate.getDate() === new Date().getDate()) {
       todayBadge--;
       upcomingBadge--;
+      todayBadgeElement.text(todayBadge);
+      upcomingBadgeElement.text(upcomingBadge);
+    } else {
+      upcomingBadge--;
+      upcomingBadgeElement.text(upcomingBadge);
     }
-    todayBadgeElement.text(todayBadge);
-    upcomingBadgeElement.text(upcomingBadge);
     $.removeCookie("badges");
   }
   todayBadgeElement.text(todayBadge);
