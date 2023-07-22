@@ -69,7 +69,7 @@ npm test
 [Express-url]: https://expressjs.com/
 [sass.com]: https://img.shields.io/badge/Scss-000000?style=for-the-badge&logo=sass&logoColor=white&color=%23CC6699
 [sass-url]: https://sass-lang.com
-[linode.com]: https://img.shields.io/badge/linode-000000?style=for-the-badge&logo=linode&logoColor=white&color=%24A47F
+[linode.com]: https://img.shields.io/badge/linode-000000?style=for-the-badge&logo=Linode&logoColor=white&color=%24A47F
 [linode-url]: https://cloud.linode.com/
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
