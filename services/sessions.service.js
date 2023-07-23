@@ -13,6 +13,7 @@ module.exports = sessions({
   resave: false,
   saveUninitialized: false,
   cookie: {
+    domain: '.taskify.space', // Set the domain attribute to share cookies across subdomains
     maxAge: day,
     secure: false,
     httpOnly: true,
